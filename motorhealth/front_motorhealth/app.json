@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "front_motorhealth",
+    "slug": "front_motorhealth",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "front_motorhealth"
+}
