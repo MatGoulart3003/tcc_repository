@@ -1,10 +1,17 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput,  } from "react-native";
+import { ButtonInput, Container, Title } from "./styles";
 
-export default function CreateUser() {
+export default function Login() {
     return (
-        <View>
-            <Text> Tela de Login</Text>
-        </View>
+        <Container>
+            
+            <Title>Bem Vindo!!</Title>
+            <Title>Usuário</Title>
+            <ButtonInput placeholder="Nome do usuário" ></ButtonInput>
+            <Title >Senha</Title>
+            <ButtonInput placeholder="Senha do usuário" ></ButtonInput>
+
+        </Container>
     );
 }

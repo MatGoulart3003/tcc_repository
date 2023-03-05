@@ -1,8 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import styles from "./style";
+import {useNavigation} from '@react-navigation/native'
 
-export default function LogIn() {
+export default function Welcome() {
+
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View style={styles.containerLogo}> 
@@ -16,11 +20,15 @@ export default function LogIn() {
 
             <View style={styles.conternerIterationArea}>
                 <Text style={styles.welcome}>Bem vindo ao MotorHealth!</Text>
-                <TouchableOpacity style={styles.loginButton}>
+                <TouchableOpacity
+                style={styles.loginButton}
+                onPress={ () => navigation.navigate('Login')}>
                     <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
                 <Text style= {styles.textCreateAccount}>Não tem uma conta? clique no botão abaixo para criar uma!</Text>
-                <TouchableOpacity style={styles.createAccountButton}>
+                <TouchableOpacity 
+                style={styles.createAccountButton}
+                onPress={ () => navigation.navigate('CreateUser')}>
                     <Text style={styles.buttonText}>Criar Conta</Text>
                 </TouchableOpacity>
                 
