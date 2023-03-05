@@ -1,10 +1,21 @@
 import React from "react";
-import { View, Text } from "react-native";
+
+import { Button, ButtonText, Container, Input, TextLogin, TextLogin2, Title } from "./styles";
 
 export default function CreateUser() {
     return (
-        <View>
-            <Text> Tela de Criar usuário</Text>
-        </View>
+        <Container>
+            
+            <Title>Criando usuário</Title>
+            <TextLogin2>Digite suas credenciais:</TextLogin2>
+            
+            <TextLogin>Usuário</TextLogin>
+            <Input  placeholder="Nome do usuário" ></Input >
+            <TextLogin >Senha</TextLogin>
+            <Input  placeholder="Senha do usuário" ></Input >
+            <Button>
+                <ButtonText>Criar</ButtonText>
+            </Button>
+        </Container>
     );
 }
