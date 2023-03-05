@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
     conternerIterationArea:{
         flex:1,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#C0C0C0",
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         paddingStart: "5%",
