@@ -1,0 +1,87 @@
+[
+    {
+        "id": "1",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2012",
+        "motor": "1.0 8V"
+    },{
+        "id": "2",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2012",
+        "motor": "1.4 8V"
+    },{
+        "id": "3",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2013",
+        "motor": "1.0 8V"
+    },{
+        "id": "4",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2013",
+        "motor": "1.4 8V"
+    },{
+        "id": "5",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2014",
+        "motor": "1.0 8V"
+    },{
+        "id": "6",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2015",
+        "motor": "1.0 8V"
+    },{
+        "id": "7",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2016",
+        "motor": "1.0 8V"
+    },{
+        "id": "8",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2017",
+        "motor": "1.0 8V"
+    },{
+        "id": "9",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2018",
+        "motor": "1.0 8V"
+    },{
+        "id": "10",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2019",
+        "motor": "1.0 8V"
+    },{
+        "id": "11",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2020",
+        "motor": "1.0 8V"
+    },{
+        "id": "12",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2021",
+        "motor": "1.0 8V"
+    },{
+        "id": "13",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2022",
+        "motor": "1.0 8V"
+    },{
+        "id": "14",
+        "marca": "Chevrolet",
+        "modelo": "Onix",
+        "ano": "2023",
+        "motor": "1.0 8V"
+    }
+]

@@ -1,8 +1,9 @@
 const express = require('express');
 const server = express();
+const carros = require('./src/data/carros.json')
 
-server.get('/', (req,res)=>{
-    return res.json({msg: 'API respondeu!'})
+server.get('/carros', (req,res)=>{
+    return res.json({carros})
 });
 
 server.listen(3000, () => {
