@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from "react";
 import { Text, View, FlatList } from "react-native";
 import api from '../../Services/Api'
-import Carro from "./Model";
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function CreateCar() {  
@@ -12,35 +11,27 @@ export default function CreateCar() {
     let modelo;
     let ano;
 
-    function getFromApi (url){
-        api.get(url)
-            .then(response => {
-                const formattedData = response.data.map(item => ({
-                    label: item.nome,
-                    value: item.codigo
-                }))
-                if(url === '/marcas'){
-                    setMarcas(formattedData);
-                }else if (marca != null){
-                    setModelos(formattedData)
-                }
-            
-        })
-        .catch(error => {
-            console.error(error)
-        })
-    }
 
     useEffect(() => {
-        if (marcas === null){
-            getFromApi('/marcas')
-        }else if (modelo === null){
-            getFromApi(`${marca}/modelos`)
-        }else if (ano === null){
-            getFromApi(`${modelo}/anos`)
-        }        
-    }, [])
-
+        // Faz uma requisição à API para recuperar os dados
+        api.get('/marcas')
+          .then(response => {
+            // Formata os dados para o formato esperado pelo PickerSelect
+            const formattedData = response.data.map(item => ({
+              label: item.nome,
+              value: item.codigo
+            }));
+    
+            // Define os dados no estado
+            setMarcas(formattedData);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
+      
+    
+      
         return(
         <View>
             <Text>Selecione a marca do carro:</Text>
