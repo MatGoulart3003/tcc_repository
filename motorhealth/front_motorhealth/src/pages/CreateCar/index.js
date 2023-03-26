@@ -7,31 +7,69 @@ export default function CreateCar() {
     const [marcas, setMarcas] = useState([])
     const [modelos, setModelos] = useState([])
     const [anos, setAnos] = useState ([])
-    let marca;
-    let modelo;
-    let ano;
+    const [marcaSelecionada, setMarcaSelecionada] =useState([]);
+    const [modeloSelecionado, setModeloSelecionado]=useState([]);
+    const [anoSelecionado, setAnoSelecionado]=useState([]);
 
+    function getMarcas (){
+        useEffect(() => {
+           
+            api.get('/marcas')
+              .then(response => {
+                
+                const formattedData = response.data.map(item => ({
+                  label: item.nome,
+                  value: item.codigo
+                }));
+                setMarcas(formattedData);
+               
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          }, []);
+    }
+    
+    function getModelos (idMarca){
+        useEffect(() => {
+            api.get(`/marcas/${59}/modelos`)
+              .then(response => {
+                const formattedData = response.data.modelos.map(item => ({
+                  label: item.nome,
+                  value: item.codigo
+                }));
+        
+                setModelos(formattedData);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          }, []);
+          
+    }  
+    
+    function getAnos (idMarca, idAno){
+        useEffect(() => {
+           
+            api.get(`/marcas/${59}/modelos/${2394}/anos`)
+              .then(response => {
+                
+                const formattedData = response.data.map(item => ({
+                  label: item.nome,
+                  value: item.codigo
+                }));
+                setAnos(formattedData);
+               
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          }, []);
+    }
+    getMarcas();
+    getModelos();
+    getAnos();   
 
-    useEffect(() => {
-        // Faz uma requisição à API para recuperar os dados
-        api.get('/marcas')
-          .then(response => {
-            // Formata os dados para o formato esperado pelo PickerSelect
-            const formattedData = response.data.map(item => ({
-              label: item.nome,
-              value: item.codigo
-            }));
-    
-            // Define os dados no estado
-            setMarcas(formattedData);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }, []);
-      
-    
-      
         return(
         <View>
             <Text>Selecione a marca do carro:</Text>
@@ -39,7 +77,8 @@ export default function CreateCar() {
                 items={marcas}
                 placeholder={{label: 'Selecione a Marca:', value: null}}
                 onValueChange={(value)=>{
-                    marca = value
+                    setMarcaSelecionada(value);
+                 //   getModelos(marca);
                 }}
             />
             <Text>Selecione o Modelo</Text>
@@ -47,7 +86,8 @@ export default function CreateCar() {
                 items={modelos}
                 placeholder={{label: 'Selecione o Modelo:', value: null}}
                 onValueChange={(value)=>{
-                    modelo = value
+                    setModeloSelecionado(value)
+                  //  getAnos(marca, modelo);
                 }}
             />
             <Text>Selecione o Ano</Text>
@@ -55,7 +95,7 @@ export default function CreateCar() {
                 items={anos}
                 placeholder={{label: 'Selecione o Ano:', value: null}}
                 onValueChange={(value)=>{
-                    ano = value
+                    setAnoSelecionado(value)
                 }}
             />
         </View>
