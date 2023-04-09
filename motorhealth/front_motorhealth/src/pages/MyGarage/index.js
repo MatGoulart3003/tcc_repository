@@ -1,20 +1,18 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Container, Title } from "./style";
+import { Button, Container} from "./style";
 import { Text } from "react-native";
 
 
-export default function MyGarage(){
-    
+export default function MyGarage(){    
     const navigation = useNavigation();
 
     return(
-
     <Container>
 
         <Text>Minha garagem</Text>
         <Button
-        onPress={ () => navigation.navigate('CreateCar')}>
+            onPress={ () => navigation.navigate('CreateCar')}>
             <Text>Cadastrar Carro</Text>
         </Button>
 

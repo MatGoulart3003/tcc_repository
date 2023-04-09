@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, FlatList } from "react-native";
+import { View } from "react-native";
 import { ButtonText, Container } from "./styles";
 
 import api from '../../Services/Api';
@@ -22,6 +22,7 @@ export default function CreateCar() {
           value: item.codigo
         }));
         setOptions(formattedData);
+        console.log(formattedData)
         setCarDetails(null)
       } catch (error) {
         console.error(error);
@@ -111,6 +112,7 @@ export default function CreateCar() {
           items={options1}
           placeholder={{ label: 'Selecione a Marca:', value: null }}
           onValueChange={(value) => {
+            console.log('doi')
             setSelectedOption1(value);
           }}
         />
