@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, Container, Title } from "./style";
 import { Text } from "react-native";
 
+
 export default function MyGarage(){
     
     const navigation = useNavigation();
