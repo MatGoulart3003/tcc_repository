@@ -4,6 +4,7 @@ import {  Input  } from "react-native-elements";
 import { Button, ButtonText, Container, TextLogin, TextLogin2, Title } from "./styles";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import userService from "../../Services/UserService";
 
 export default function CreateUser() {
 
@@ -21,9 +22,28 @@ export default function CreateUser() {
         }else if (password != confirmPass){
             Alert.alert("As senhas tem que ser iguais!!")
         }else{
-            navigation.navigate("Login")
+            return true
         }
     }
+
+    const saveUser = () => {
+        if (equalPassword()){
+            let data = {
+                user: user,
+                password: password
+            }
+            
+            userService.register(data)
+            .then((response) =>{
+                console.log(response)
+            })
+            .catch((error)=>{
+                console.log('erro')
+            })
+        }
+        
+    }
+
 
     return (
         <Container>
@@ -50,7 +70,7 @@ export default function CreateUser() {
               onChangeText={value => setConfirmPass(value)}
               secureTextEntry={true}
             />
-            <Button onPress={ () => equalPassword()}>
+            <Button onPress={ () => saveUser()}>
                 <ButtonText>Criar</ButtonText>
             </Button>
         </Container>
