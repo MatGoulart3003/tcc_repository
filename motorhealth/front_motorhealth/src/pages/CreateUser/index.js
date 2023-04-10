@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {  Input  } from "react-native-elements";
 
 import { Button, ButtonText, Container, TextLogin, TextLogin2, Title } from "./styles";
-import { Alert } from "react-native";
+import { Alert, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import userService from "../../Services/UserService";
 
@@ -13,6 +13,7 @@ export default function CreateUser() {
     const [user, setUser] = useState(null)
     const [password, setPassword] =  useState(null)
     const [confirmPass, setConfirmPass] = useState(null)
+    const [isLoading, setLoading] = useState(false)
 
     const equalPassword = () => {
         if(user === null){
@@ -28,17 +29,21 @@ export default function CreateUser() {
 
     const saveUser = () => {
         if (equalPassword()){
+            setLoading(true)
             let data = {
                 user: user,
                 password: password
             }
-            
+
             userService.register(data)
             .then((response) =>{
-                console.log(response)
+                console.log(response.data)
+                setLoading(false)
             })
             .catch((error)=>{
+                console.log(error)
                 console.log('erro')
+                setLoading(false)
             })
         }
         
@@ -70,9 +75,14 @@ export default function CreateUser() {
               onChangeText={value => setConfirmPass(value)}
               secureTextEntry={true}
             />
-            <Button onPress={ () => saveUser()}>
-                <ButtonText>Criar</ButtonText>
-            </Button>
+            {isLoading &&
+              <Text>Carregando...</Text>
+            }
+            {!isLoading &&                
+              <Button onPress={ () => saveUser()}>
+              <ButtonText>Criar</ButtonText>
+              </Button>
+            }
         </Container>
     );
 }
