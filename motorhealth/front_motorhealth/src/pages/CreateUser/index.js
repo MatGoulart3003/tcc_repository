@@ -4,7 +4,7 @@ import {  Input  } from "react-native-elements";
 import { Button, ButtonText, Container, TextLogin, TextLogin2, Title } from "./styles";
 import { Alert, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import userService from "../../Services/UserService";
+import userService from "../../Services/UserServiceApi";
 
 export default function CreateUser() {
 
@@ -31,7 +31,7 @@ export default function CreateUser() {
         if (equalPassword()){
             setLoading(true)
             let data = {
-                user: user,
+                username: user,
                 password: password
             }
 

@@ -7,7 +7,7 @@ import { Button, ButtonText, Container, Title, TextLogin } from "./styles";
 export default function Login() {
     const navigation = useNavigation();
 
-    const [user, setUser] = useState(null)
+    const [username, setUsername] = useState(null)
     const [password, setPassword] =  useState(null)
 
     return (
@@ -18,7 +18,7 @@ export default function Login() {
             <Input
               placeholder="Nome do usuário"
               leftIcon={{ type: 'font-awesome', name:'user'}}
-              onChangeText={value => setUser(value)}
+              onChangeText={value => setUsername(value)}
               />           
             <TextLogin >Senha</TextLogin>
             <Input 
