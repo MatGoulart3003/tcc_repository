@@ -5,9 +5,14 @@ const bcrypt = require('bcrypt');
 app.use(express.json());
 
 const users = []
+const cars = []
 
 app.get('/users',(req,res)=>{
     res.json(users)
+})
+
+app.get('/usersCars', (req,res)=>{
+    res.json(cars)
 })
 
 app.post ('/users', async (req,res)=>{
@@ -41,4 +46,19 @@ app.post ('/users/login', async (req,res)=>{
     }
 })
 
+app.post ('/usersCars/create', async (req,res) =>{
+    try{
+        const car = { anoCarro: req.body.anoCarro, 
+                      combustivel: req.body.combustivel,
+                      marcaCarro: req.body.marcaCarro,
+                      modeloCarro: req.body.modeloCarro,                     
+                      }
+        cars.push(car)
+        res.status(201).send("Carro criado com sucesso")
+    }catch{
+        res.status(500).send()
+    }
+})
+
 app.listen(3000);
+

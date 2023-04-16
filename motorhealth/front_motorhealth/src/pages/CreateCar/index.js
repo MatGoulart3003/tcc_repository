@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { ButtonText, Container } from "./styles";
+import { ButtonText, Container, Button } from "./styles";
 
 import api from '../../Services/Api';
+import carServiceApi from '../../Services/CarsServiceApi'
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function CreateCar() {
@@ -70,8 +71,7 @@ export default function CreateCar() {
             marcaCarro: response.data.Marca,
             modeloCarro: response.data.Modelo,
             anoCarro: response.data.AnoModelo,
-            combustivel: response.data.Combustivel,
-            preco: response.data.Valor,
+            combustivel: response.data.Combustivel            
           };
           return formattedData;
         } catch (error) {
@@ -136,7 +136,11 @@ export default function CreateCar() {
                 <ButtonText>Modelo: {carDetails.modeloCarro}</ButtonText>
                 <ButtonText>Ano: {carDetails.anoCarro}</ButtonText>
                 <ButtonText>Combustivel: {carDetails.combustivel}</ButtonText>
-                <ButtonText>Preço: {carDetails.preco}</ButtonText>
+               
+                <Button onPress={() =>  carServiceApi.createCar(carDetails)}>
+                  <ButtonText>Salvar</ButtonText>
+                </Button>
+
             </View>
             ) : (
                  <ButtonText>Carregando resultado...</ButtonText>

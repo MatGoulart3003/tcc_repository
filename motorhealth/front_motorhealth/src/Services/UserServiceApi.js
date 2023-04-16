@@ -1,12 +1,12 @@
 import axios from "axios"
 
-const baseUrl = 'http://192.168.0.247:3000';
+const baseUrl = 'http://192.168.0.247:3000/users';
 
 class UserServiceApi {
 
     async register(data){
         return axios({
-            url: `${baseUrl}/users`,
+            url: `${baseUrl}`,
             method: "POST",
             timeout: 5000,
             data: data,
@@ -22,7 +22,7 @@ class UserServiceApi {
 
     async doLogin (data){
         return axios({
-            url: `${baseUrl}/users/login`,
+            url: `${baseUrl}/login`,
             method: "POST",
             timeout: 5000,
             data: data,

@@ -25,13 +25,13 @@ export default function Login() {
         userServiceApi.doLogin(data)
         .then((response) => {         
           setIsLoading(false)
-          Alert.alert('Usuário autenticado com sucesso!')
+          Alert.alert('Sucesso!', 'Usuário autenticado com sucesso!')
           navigation.navigate('MyGarage');         
         })
         .catch((error)=>{
           console.log(error)
           setIsLoading(false)
-          Alert.alert('Usuário/Senha incorretos!')
+          Alert.alert('Erro!!','Usuário/Senha incorretos!')
         })
       }
        

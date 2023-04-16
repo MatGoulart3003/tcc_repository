@@ -41,7 +41,7 @@ export default function CreateUser() {
             .then((response) =>{
                 console.log(response.data)
                 setLoading(false)
-                Alert.alert('Usuário criado com sucesso!')
+                Alert.alert('Sucesso!', 'Usuário criado com sucesso!')
                 navigation.navigate('Welcome')
             })
             .catch((error)=>{
