@@ -4,7 +4,7 @@ import {  Input  } from "react-native-elements";
 import { Button, ButtonText, Container, TextLogin, TextLogin2, Title } from "./styles";
 import { Alert, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import userService from "../../Services/UserServiceApi";
+import userServiceApi from "../../Services/UserServiceApi";
 
 export default function CreateUser() {
 
@@ -16,8 +16,10 @@ export default function CreateUser() {
     const [isLoading, setLoading] = useState(false)
 
     const equalPassword = () => {
-        if(user === null){
+        if(user == null || user === ""){
             Alert.alert("Digite um nome de usuário!!")
+        }else if (password == null || password === ""){
+            Alert.alert("Digite uma senha")
         }else if (confirmPass ===  null){
             Alert.alert("Confirme sua senha")
         }else if (password != confirmPass){
@@ -35,21 +37,24 @@ export default function CreateUser() {
                 password: password
             }
 
-            userService.register(data)
+            userServiceApi.register(data)
             .then((response) =>{
                 console.log(response.data)
                 setLoading(false)
+                Alert.alert('Usuário criado com sucesso!')
             })
             .catch((error)=>{
                 console.log(error)
-                console.log('erro')
                 setLoading(false)
             })
         }
         
     }
 
-
+    const handlePress = () => {
+        saveUser();
+        navigation.navigate('Welcome');
+      };
     return (
         <Container>
             
@@ -79,7 +84,7 @@ export default function CreateUser() {
               <Text>Carregando...</Text>
             }
             {!isLoading &&                
-              <Button onPress={ () => saveUser()}>
+              <Button onPress={ () => handlePress()}>
               <ButtonText>Criar</ButtonText>
               </Button>
             }
