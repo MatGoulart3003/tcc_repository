@@ -12,23 +12,21 @@ export default function Login() {
     const [username, setUsername] = useState(null)
     const [password, setPassword] =  useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const [isAutenticated, setIsAltenticated] = useState(false)
-
+    
     const autenticateUser = () => {
       
 
       if (isValidUser()){
-        setIsAltenticated(false)
         let data = {
           username: username,
           password: password
         }
 
         userServiceApi.doLogin(data)
-        .then((response) => {
-          setIsAltenticated(true)
+        .then((response) => {         
           setIsLoading(false)
-          Alert.alert('Usuário autenticado com sucesso!')          
+          Alert.alert('Usuário autenticado com sucesso!')
+          navigation.navigate('MyGarage');         
         })
         .catch((error)=>{
           console.log(error)
@@ -36,7 +34,7 @@ export default function Login() {
           Alert.alert('Usuário/Senha incorretos!')
         })
       }
-      return isAutenticated
+       
     }
 
     const isValidUser = () => {
@@ -48,13 +46,7 @@ export default function Login() {
         return true
       }
     }
-
-    const handlePress = () => {
-      if (autenticateUser()){
-        navigation.navigate('MyGarage');
-      }
-      
-    };
+   
     return (
         <Container>
             
@@ -72,7 +64,7 @@ export default function Login() {
               onChangeText={value => setPassword(value)}
               secureTextEntry={true}
             />
-            <Button onPress={() => handlePress()}>
+            <Button onPress={() => autenticateUser()}>
                 <ButtonText>Login</ButtonText>
             </Button>
         </Container>

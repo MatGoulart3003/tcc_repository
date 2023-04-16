@@ -42,6 +42,7 @@ export default function CreateUser() {
                 console.log(response.data)
                 setLoading(false)
                 Alert.alert('Usuário criado com sucesso!')
+                navigation.navigate('Welcome')
             })
             .catch((error)=>{
                 console.log(error)
@@ -51,10 +52,6 @@ export default function CreateUser() {
         
     }
 
-    const handlePress = () => {
-        saveUser();
-        navigation.navigate('Welcome');
-      };
     return (
         <Container>
             
@@ -84,7 +81,7 @@ export default function CreateUser() {
               <Text>Carregando...</Text>
             }
             {!isLoading &&                
-              <Button onPress={ () => handlePress()}>
+              <Button onPress={ () =>  saveUser()}>
               <ButtonText>Criar</ButtonText>
               </Button>
             }
