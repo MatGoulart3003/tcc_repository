@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import {  Input  } from "react-native-elements";
 
-import { Button, ButtonText, Container, TextLogin, TextLogin2, Title } from "./styles";
+import { Button, ButtonText, Container, TextLogin, TextLogin2, Title, Input } from "./styles";
 import { Alert, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import userServiceApi from "../../Services/UserServiceApi";
@@ -82,7 +81,7 @@ export default function CreateUser() {
             }
             {!isLoading &&                
               <Button onPress={ () =>  saveUser()}>
-              <ButtonText>Criar</ButtonText>
+                <ButtonText>Criar</ButtonText>
               </Button>
             }
         </Container>

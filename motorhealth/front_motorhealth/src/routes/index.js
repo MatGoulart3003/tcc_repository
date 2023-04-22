@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import CreateUser from '../pages/CreateUser'
 import MyGarage from "../pages/MyGarage"
 import CreateCar from "../pages/CreateCar"
+import ManutPage from "../pages/MyGarage/ManutPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,11 @@ export default function Routes(){
                 name="CreateCar"
                 component={CreateCar}
                 options={{ headerShown: false}}
+            />
+            <Stack.Screen
+                name="ManutPage"
+                component={ManutPage}
+                options={{ headerShown: true}}
             />
 
         </Stack.Navigator>

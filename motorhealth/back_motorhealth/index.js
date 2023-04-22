@@ -5,7 +5,12 @@ const bcrypt = require('bcrypt');
 app.use(express.json());
 
 const users = []
-const cars = []
+const cars = [{
+    anoCarro: 2020, 
+    combustivel: 'Gasolina',
+    marcaCarro: 'Volkswagen',
+    modeloCarro: 'Gol g6',
+}]
 
 app.get('/users',(req,res)=>{
     res.json(users)

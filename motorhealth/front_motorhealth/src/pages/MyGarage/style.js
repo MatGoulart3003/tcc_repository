@@ -12,17 +12,32 @@ export const Button = styled.TouchableOpacity`
  
 `;
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
     flex: 1;
-    background-color: #C0C0C0;
+    align-items: center;
+    background-color: #363636;
     borter-radius: 50px;
-`;
+    padding-top: 15px;
+    `;
 
 export const Title = styled.Text`
 
-    font-size: 25px;
-    background-color: #FFF;
-    font-weight: bold ;
-    bottom: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
 
 `;
+
+export const CarButton = styled.TouchableOpacity`
+    
+    justify-content: center;
+    height: 40px;
+    width: 80%;
+    paddingertical:8px;
+    border-color: #696969;
+    border-width: 1px;
+    margin-top:12px;
+    border-radius: 5px;
+
+`
+

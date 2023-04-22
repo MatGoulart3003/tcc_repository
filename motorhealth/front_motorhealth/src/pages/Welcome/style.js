@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
     conternerIterationArea:{
         flex:1,
-        backgroundColor: "#C0C0C0",
+        backgroundColor: "#363636",
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         paddingStart: "5%",
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
         marginBottom: 12,
         textAlign: "center",
-        
+        color: "#FFFFFF"
     },    
     loginButton:{
        
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         top: 68,
-        fontWeight:'bold'
-       
+        fontWeight:'bold',
+        color: "#FFFFFF"
     },
     createAccountButton:{
         backgroundColor: '#3277CC',
