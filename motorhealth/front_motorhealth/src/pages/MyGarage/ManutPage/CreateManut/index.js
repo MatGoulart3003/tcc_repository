@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Container, Button, ButtonText, 
     Input, ViewKM, ViewDateKM, LabelText,ButtonDate, ViewDate, 
     ViewPicker, ViewObs, InputObs, ViewSave} from "../CreateManut/style";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
+import Api from "../../../../Services/ApiCar";
 
 export default function CreateManut(){
 
@@ -14,6 +15,15 @@ export default function CreateManut(){
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [obs, setObs] = useState('obs')
+
+    const pickerStyle = {
+        inputAndroid: {
+          color: 'A9A9A9',
+        },
+        itemSelectedTextStyle: {
+          color: 'A9A9A9',
+        },
+      };
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
@@ -33,9 +43,35 @@ export default function CreateManut(){
         showMode('date');
     };
 
-    console.log(km);
-    console.log(obs);
-   
+    const getManuts = async () => {
+        try{
+            const response = await Api.get('/maintenance')
+            const formattedData = response.data.map(item =>({
+                label: item.name,
+                value: item.id
+            }))
+            setManutOptions(formattedData)
+            console.log(formattedData)
+        }catch(error){
+            console.log(error)
+        }
+    };
+    
+    useEffect(() => {
+        getManuts();
+      }, []);
+
+    const saveManut = () => {
+        let manut = {
+            data: date,
+            quilometragem: km,
+            servico: manutSelected,
+            obs: obs
+        }
+
+        console.log(manut)
+    }
+
     return (
         
         <Container>
@@ -70,7 +106,7 @@ export default function CreateManut(){
                     placeholder={{label: 'Selecione uma Manutenção:', value: null }}  
                     onValueChange={value => setManutSelected(value)}
                     items={manutOptions}
-                    
+                    style={pickerStyle}
                 />
             </ViewPicker>
             <ViewObs>
@@ -82,7 +118,7 @@ export default function CreateManut(){
                 />
             </ViewObs>
             <ViewSave>
-                <Button>
+                <Button onPress={() => saveManut()} >
                     <ButtonText>Salvar</ButtonText>
                 </Button>
             </ViewSave>
