@@ -46,7 +46,13 @@ export default function Routes(){
              <Stack.Screen
                 name="CreateManut"
                 component={CreateManut}
-                options={{ headerShown: false}}
+                options={{ title: 'Nova Manutenção',
+                        headerStyle:{
+                            backgroundColor: '#4F4F4F'
+                        },
+                        headerTintColor:'#FFF'
+                    }}
+                
             />
 
         </Stack.Navigator>

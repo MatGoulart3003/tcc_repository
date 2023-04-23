@@ -6,6 +6,7 @@ app.use(express.json());
 
 const users = []
 const cars = [{
+    idCar: 1,
     anoCarro: 2020, 
     combustivel: 'Gasolina',
     marcaCarro: 'Volkswagen',
