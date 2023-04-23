@@ -24,8 +24,9 @@ export default function MyGarage(){
       
         <Title>Minha garagem</Title>
         {carList.map((item)=>(
-            <CarButton>
-              <ButtonText> {item.modeloCarro}</ButtonText> 
+            
+            <CarButton onPress={() => navigation.navigate('ManutPage')}>
+              <ButtonText key={item.modeloCarro} > {item.modeloCarro}</ButtonText> 
             </CarButton>
         ))}
         <Button onPress={() => navigation.navigate('CreateCar')}>

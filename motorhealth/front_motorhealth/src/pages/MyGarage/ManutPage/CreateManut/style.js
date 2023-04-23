@@ -33,3 +33,12 @@ export const ButtonText = styled.Text`
     font-weight: bold;
     color: #FFF;
 `
+export const Input = styled.TextInput`
+    height: 40px;
+    width: 80%;
+    border-color: black;
+    border-bottom-width: 1px;
+    margin-vertical: 10px;
+    padding: 10px;
+    font-size: 18px;
+`;
