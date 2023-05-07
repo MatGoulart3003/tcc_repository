@@ -26,7 +26,7 @@ export default function MyGarage(){
         {carList.map((item)=>(
             
             <CarButton onPress={() => navigation.navigate('ManutPage')}>
-              <ButtonText key={item.idCar} > {item.modeloCarro}</ButtonText> 
+              <ButtonText key={item.modeloCarro} > {item.modeloCarro}</ButtonText> 
             </CarButton>
         ))}
         <Button onPress={() => navigation.navigate('CreateCar')}>
