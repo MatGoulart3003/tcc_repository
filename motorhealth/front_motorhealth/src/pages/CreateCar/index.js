@@ -71,7 +71,8 @@ export default function CreateCar() {
             marcaCarro: response.data.Marca,
             modeloCarro: response.data.Modelo,
             anoCarro: response.data.AnoModelo,
-            combustivel: response.data.Combustivel            
+            combustivel: response.data.Combustivel
+                
           };
           return formattedData;
         } catch (error) {
@@ -112,7 +113,6 @@ export default function CreateCar() {
           items={options1}
           placeholder={{ label: 'Selecione a Marca:', value: null }}
           onValueChange={(value) => {
-            console.log('doi')
             setSelectedOption1(value);
           }}
         />
@@ -136,8 +136,9 @@ export default function CreateCar() {
                 <ButtonText>Modelo: {carDetails.modeloCarro}</ButtonText>
                 <ButtonText>Ano: {carDetails.anoCarro}</ButtonText>
                 <ButtonText>Combustivel: {carDetails.combustivel}</ButtonText>
+                <ButtonText>ID usuário: {carDetails.userId}</ButtonText>
                
-                <Button onPress={() =>  carServiceApi.createCar(carDetails)}>
+                <Button onPress={() => carServiceApi.createCar(carDetails)}>
                   <ButtonText>Salvar</ButtonText>
                 </Button>
 

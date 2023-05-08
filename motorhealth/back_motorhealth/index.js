@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
+const { PrismaClient } = require('@prisma/client');
+
+const prisma =  new PrismaClient()
 
 app.use(express.json());
 
@@ -24,33 +27,33 @@ const manut = [
     {id:17, name: 'Troca de Embreagem'},
     {id:18, name: 'Outro, Especifique Na OBS'}
 ]
-const users = []
-const cars = [{
-    idCar: 1,
-    anoCarro: 2020, 
-    combustivel: 'Gasolina',
-    marcaCarro: 'Volkswagen',
-    modeloCarro: 'Gol g6',
-}]
+
 
 app.get('/maintenance', (req,res)=>{
     res.json(manut)
 
 })
 
-app.get('/users',(req,res)=>{
+app.get('/users',async (req,res)=>{
+    const users = await prisma.user.findMany()
     res.json(users)
 })
 
-app.get('/usersCars', (req,res)=>{
+app.get('/usersCars', async (req,res)=>{
+    const cars = await prisma.car.findMany()
     res.json(cars)
 })
 
 app.post ('/users', async (req,res)=>{
     try{
         const hasedPassword = await bcrypt.hash(req.body.password, 10)
-        const user = { username: req.body.username, password: hasedPassword}
-        users.push(user)
+        const prismaUser = await prisma.user.create({
+            data:{
+                username: req.body.username,
+                password: hasedPassword
+            }
+        })
+        console.log(prismaUser)
         res.status(201).send()
     }catch{
         res.status(500).send()
@@ -58,15 +61,19 @@ app.post ('/users', async (req,res)=>{
 })
 
 app.post ('/users/login', async (req,res)=>{
-    const user = users.find(user => user.username === req.body.username)
-    console.log(user)
-    if(user == null){
+    const prismaUser = await prisma.user.findUnique({
+        where:{
+            username: req.body.username,
+        },
+    })
+    console.log(prismaUser)
+    if(prismaUser == null){
         return res.status(400).send('Usuário nulo')
         
     }
 
     try{
-        if (await bcrypt.compare(req.body.password, user.password)){
+        if (await bcrypt.compare(req.body.password, prismaUser.password)){
             res.send('Logado')
             
         }else{
@@ -78,16 +85,28 @@ app.post ('/users/login', async (req,res)=>{
 })
 
 app.post ('/usersCars/create', async (req,res) =>{
+    const {anoCarro,combustivel,marcaCarro,modeloCarro} = req.body
     try{
-        const car = { anoCarro: req.body.anoCarro, 
-                      combustivel: req.body.combustivel,
-                      marcaCarro: req.body.marcaCarro,
-                      modeloCarro: req.body.modeloCarro,                     
-                      }
-        cars.push(car)
+       
+        const prismaCar = prisma.car.create({
+            data: {
+              anoCarro: anoCarro,
+              combustivel: combustivel,
+              marcaCarro: marcaCarro,
+              modeloCarro: modeloCarro,
+              userId:1
+            }
+          })
+          .then((createdCar) => {
+            console.log("Carro criado com sucesso: ", createdCar);
+          })
+          .catch((error) => {
+            console.log("Erro ao criar carro: ", error);
+          });
+              
         res.status(201).send("Carro criado com sucesso")
     }catch{
-        res.status(500).send()
+        res.status(500).send("carro zuado")
     }
 })
 
