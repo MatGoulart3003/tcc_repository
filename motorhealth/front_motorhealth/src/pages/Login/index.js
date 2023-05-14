@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-
+import Api from "../../Services/ApiCar"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { Button, ButtonText, Container, Title, TextLogin, Input } from "./styles";
 import { Alert } from "react-native";
@@ -26,6 +27,7 @@ export default function Login() {
         .then((response) => {         
           setIsLoading(false)
           Alert.alert('Sucesso!', 'Usuário autenticado com sucesso!')
+          saveUserStorage(data.username)
           navigation.navigate('MyGarage');         
         })
         .catch((error)=>{
@@ -36,6 +38,21 @@ export default function Login() {
       }
        
     }
+
+    const saveUserStorage = async (nameUser) => {
+      try{
+        const response = await Api.get(`/users/${nameUser}`)
+        const myUser = response.data
+        const id = JSON.stringify(myUser.id)
+        const username = myUser.username        
+        AsyncStorage.clear()
+        AsyncStorage.setItem(username, id)
+
+      }catch(error){
+        console.log(error)
+      }
+    }
+   
 
     const isValidUser = () => {
       if (username == null){

@@ -34,10 +34,22 @@ app.get('/maintenance', (req,res)=>{
 
 })
 
-app.get('/users',async (req,res)=>{
+app.get('/users', async (req,res)=>{
     const users = await prisma.user.findMany()
     res.json(users)
 })
+
+app.get('/users/:name',async (req,res)=>{
+    const name = req.params.name;
+    console.log(name) 
+    const user = await prisma.user.findFirst({
+        where:{
+            username: name
+        }
+    })
+    res.json(user)
+})
+
 
 app.get('/usersCars', async (req,res)=>{
     const cars = await prisma.car.findMany()
