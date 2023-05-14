@@ -1,6 +1,6 @@
 import React, { useState,useEffect, useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Container, Title, CarButton } from "./style";
+import { Button, Container, Title, CarButton, ViewRefreshCar, ViewRegisterCar } from "./style";
 import { ButtonText } from "../Login/styles";
 import apiCar from "../../Services/ApiCar";
 import { Text, FlatList } from "react-native";
@@ -26,7 +26,7 @@ export default function MyGarage(){
     
     useEffect(() => {         
         getCars();    
-    }, [storage]);
+    }, []);
 
     searchUserStorage("idUserLoged");   
     return(
@@ -39,10 +39,18 @@ export default function MyGarage(){
                 <ButtonText>{item.modeloCarro}</ButtonText> 
             </CarButton>
 ))}
-    
-        <Button onPress={() => navigation.navigate('CreateCar')}>
+
+        <ViewRegisterCar>
+          <Button onPress={() => navigation.navigate('CreateCar')}>
             <ButtonText>Cadastrar Carro</ButtonText>
-        </Button>
+          </Button>
+        </ViewRegisterCar>
+
+        <ViewRefreshCar>
+          <Button >
+            <ButtonText onPress={() => getCars()}>Recarregar Carros</ButtonText>
+          </Button>
+        </ViewRefreshCar>
        
       
     </Container>

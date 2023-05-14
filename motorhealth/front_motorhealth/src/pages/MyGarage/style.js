@@ -3,13 +3,12 @@ import styled from 'styled-components/native'
 export const Button = styled.TouchableOpacity`
     height: 40px;
     width: 80%;
-    borderRadius:50px;
+    borderRadius:15px;
     paddingVertical:8px;
     background-color: #3277CC;
     justify-content: center;
     align-items: center;
-    top: 30px;
- 
+    
 `;
 
 export const Container = styled.SafeAreaView`
@@ -39,5 +38,20 @@ export const CarButton = styled.TouchableOpacity`
     margin-top:12px;
     border-radius: 5px;
 
-`
+`;
+export const ViewRegisterCar = styled.View`
+    justify-content: center;
+    margin-top: 50px;    
+    width: 350px;
+    align-items: center;
+
+`;
+export const ViewRefreshCar = styled.View`
+    justify-content: center;
+    margin: 25px;
+    width: 350px;
+    align-items: center;
+    position: absolute;
+    bottom:0;
+`;
 
