@@ -46,7 +46,8 @@ export default function Login() {
         const id = JSON.stringify(myUser.id)
         const username = myUser.username        
         AsyncStorage.clear()
-        AsyncStorage.setItem(username, id)
+        AsyncStorage.setItem("idUserLoged", id)
+        AsyncStorage.setItem("UsernameLoged", username)
 
       }catch(error){
         console.log(error)

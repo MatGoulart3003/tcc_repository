@@ -31,7 +31,14 @@ export default function Routes(){
             <Stack.Screen
                 name="MyGarage"
                 component={MyGarage}
-                options={{ headerShown: false}}
+                options={{                     
+                    title: 'Minha Garagem',                   
+                    headerStyle:{
+                            backgroundColor: '#4F4F4F'
+                        },
+                        headerTintColor:'#FFF'
+                    }}
+                
             />
             <Stack.Screen
                 name="CreateCar"
