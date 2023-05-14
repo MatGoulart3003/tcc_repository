@@ -26,8 +26,8 @@ export default function MyGarage(){
     
     useEffect(() => {         
         getCars();    
-    }, []);
-    
+    }, [storage]);
+
     searchUserStorage("idUserLoged");   
     return(
     <Container>
@@ -39,7 +39,7 @@ export default function MyGarage(){
                 <ButtonText>{item.modeloCarro}</ButtonText> 
             </CarButton>
 ))}
-
+    
         <Button onPress={() => navigation.navigate('CreateCar')}>
             <ButtonText>Cadastrar Carro</ButtonText>
         </Button>

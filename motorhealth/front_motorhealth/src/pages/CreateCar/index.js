@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { ButtonText, Container, Button } from "./styles";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from '../../Services/Api';
 import carServiceApi from '../../Services/CarsServiceApi'
 import RNPickerSelect from 'react-native-picker-select';
@@ -14,6 +15,14 @@ export default function CreateCar() {
     const [options2, setOptions2] = useState([]);
     const [options3, setOptions3] = useState([]);
     const [carDetails, setCarDetails] = useState(null);
+    const [storage, setStorage] =  useState('')
+
+
+    const searchUserStorage = async (key) =>{
+        const value = await AsyncStorage.getItem(key)
+        console.log(value)
+        setStorage(value)
+    }; 
 
     const fetchMarcas = async () => {
       try {
@@ -71,8 +80,8 @@ export default function CreateCar() {
             marcaCarro: response.data.Marca,
             modeloCarro: response.data.Modelo,
             anoCarro: response.data.AnoModelo,
-            combustivel: response.data.Combustivel
-                
+            combustivel: response.data.Combustivel,
+            userId: storage
           };
           return formattedData;
         } catch (error) {
@@ -90,6 +99,7 @@ export default function CreateCar() {
         }
     }
     
+    searchUserStorage("idUserLoged");   
     useEffect(() => {
       fetchMarcas();
     }, []);
@@ -144,7 +154,7 @@ export default function CreateCar() {
 
             </View>
             ) : (
-                 <ButtonText>Carregando resultado...</ButtonText>
+                 <ButtonText>Preencha os dados acima</ButtonText>
         )}
               
       </Container>

@@ -43,7 +43,13 @@ export default function Routes(){
             <Stack.Screen
                 name="CreateCar"
                 component={CreateCar}
-                options={{ headerShown: false}}
+                options={{ 
+                    title: 'Cadastre seu carro',
+                    headerStyle:{
+                        backgroundColor: '#4F4F4F'
+                    },
+                    headerTintColor:'#FFF'
+                }}
             />
             <Stack.Screen
                 name="ManutPage"
