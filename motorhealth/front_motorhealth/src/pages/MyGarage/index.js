@@ -1,9 +1,8 @@
-import React, { useState,useEffect, useCallback } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Container, Title, CarButton, ViewRefreshCar, ViewRegisterCar } from "./style";
+import { Button, Container, CarButton, ViewRefreshCar, ViewRegisterCar } from "./style";
 import { ButtonText } from "../Login/styles";
 import apiCar from "../../Services/ApiCar";
-import { Text, FlatList } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MyGarage(){   
@@ -24,6 +23,13 @@ export default function MyGarage(){
         setStorage(value)
     };    
     
+    const saveCarStorage = async (carId) => {
+        console.log("ID carro",carId)
+        let carIdString = JSON.stringify(carId);
+        AsyncStorage.setItem("idCarStorage", carIdString)
+        navigation.navigate('ManutPage')
+    }
+
     useEffect(() => {         
         getCars();    
     }, []);
@@ -35,7 +41,7 @@ export default function MyGarage(){
         {carList
         .filter((item) => item.userId == storage)
         .map((item) => (
-            <CarButton key={item.id} onPress={() => navigation.navigate('ManutPage')}>
+            <CarButton key={item.id} onPress={() => saveCarStorage(item.id)}>
                 <ButtonText>{item.modeloCarro}</ButtonText> 
             </CarButton>
 ))}

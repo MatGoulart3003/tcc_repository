@@ -5,16 +5,24 @@ import {Container, Button, ButtonText,
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import Api from "../../../../Services/ApiCar";
+import moment from 'moment'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function CreateManut(){
 
     const [km, setKm] = useState(0)
     const [manutOptions, setManutOptions] = useState([])
     const [manutSelected, setManutSelected]= useState()
+    const [manutDescriptionSelected, setManutDescriptionSelected] = useState('')
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [obs, setObs] = useState('obs')
+
+    const navigation = useNavigation()
 
     const pickerStyle = {
         inputAndroid: {
@@ -61,15 +69,23 @@ export default function CreateManut(){
         getManuts();
       }, []);
 
-    const saveManut = () => {
+    const saveManut = async () => {
+
+        const formattedDate = moment(date).format('DD/MM/YYYY')
+        const idCarStorage = await AsyncStorage.getItem('idCarStorage')
+
         let manut = {
-            data: date,
-            quilometragem: km,
-            servico: manutSelected,
-            obs: obs
+            date: formattedDate,
+            km: km,
+            maintenance: manutSelected,
+            descriptionMaintence: manutDescriptionSelected,
+            obs: obs,
+            idCar: idCarStorage
         }
 
         console.log(manut)
+        Alert.alert('Sucesso!', 'Manutenção salva com sucesso!')
+        navigation.navigate('ManutPage')
     }
 
     return (
@@ -103,8 +119,13 @@ export default function CreateManut(){
             </ViewDateKM>
             <ViewPicker>
                 <RNPickerSelect
-                    placeholder={{label: 'Selecione uma Manutenção:', value: null }}  
-                    onValueChange={value => setManutSelected(value)}
+                    placeholder={{label: 'Selecione uma Manutenção:', value: null }}
+                    onValueChange={(value, index) => {
+                        setManutSelected(value)
+                        if (manutOptions[index-1] != undefined){
+                            setManutDescriptionSelected(manutOptions[index-1].label) 
+                        }                                    
+                    }}                                  
                     items={manutOptions}
                     style={pickerStyle}
                 />

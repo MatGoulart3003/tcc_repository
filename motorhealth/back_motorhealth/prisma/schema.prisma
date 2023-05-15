@@ -29,3 +29,10 @@ model Car {
   @@map("cars")  
 }
 
+model Maintenance {
+  id Int @id @default(autoincrement())
+  date DateTime
+
+  @@map("maintenances")
+}
+
