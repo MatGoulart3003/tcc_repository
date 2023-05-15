@@ -32,4 +32,20 @@ export const ButtonText = styled.Text`
     font-size: 20px;
     font-weight: bold;
     color: #FFF;
-`
+`;
+
+export const ViewRefreshCar = styled.View`
+    justify-content: center;
+    margin: 25px;
+    width: 350px;
+    align-items: center;
+    position: absolute;
+    bottom:30px;
+`;
+
+export const DescriptionText = styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
+    margin: 20px;
+`;

@@ -56,6 +56,11 @@ app.get('/usersCars', async (req,res)=>{
     res.json(cars)
 })
 
+app.get('/maintenances/database', async (req,res)=>{
+    const maintenances = await prisma.maintenance.findMany()
+    res.json(maintenances)
+})
+
 app.post ('/users', async (req,res)=>{
     try{
         const hasedPassword = await bcrypt.hash(req.body.password, 10)
