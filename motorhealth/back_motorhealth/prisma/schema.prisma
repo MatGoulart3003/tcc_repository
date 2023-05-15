@@ -32,9 +32,9 @@ model Car {
 
 model Maintenance {
   id Int @id @default(autoincrement())
-  date DateTime
-  maintence String
-  descriptionMaintence String
+  date String
+  maintenance Int
+  descriptionMaintenance String
   km String
   obs String
   car Car @relation(fields: [idCar], references: [id])

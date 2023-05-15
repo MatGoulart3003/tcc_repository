@@ -9,6 +9,7 @@ import moment from 'moment'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import maintenanceServiceApi from "../../../../Services/MaintenanceApi";
 
 
 export default function CreateManut(){
@@ -78,12 +79,13 @@ export default function CreateManut(){
             date: formattedDate,
             km: km,
             maintenance: manutSelected,
-            descriptionMaintence: manutDescriptionSelected,
+            descriptionMaintenance: manutDescriptionSelected,
             obs: obs,
             idCar: idCarStorage
         }
 
         console.log(manut)
+        maintenanceServiceApi.createCar(manut)
         Alert.alert('Sucesso!', 'Manutenção salva com sucesso!')
         navigation.navigate('ManutPage')
     }

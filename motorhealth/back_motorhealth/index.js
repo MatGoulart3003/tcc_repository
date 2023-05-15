@@ -122,5 +122,34 @@ app.post ('/usersCars/create', async (req,res) =>{
     }
 })
 
+app.post('/maintenance/create', async (req, res)=> {
+    const {date,descriptionMaintenance,idCar,km,maintenance, obs} = req.body
+    try{
+        let idCarNumber = parseInt(idCar);
+        let dateString = JSON.stringify(date)
+        const prismaMaintenance = prisma.maintenance.create({
+            data: {
+                date: dateString,
+                descriptionMaintenance: descriptionMaintenance,
+                idCar: idCarNumber,
+                km:km,
+                maintenance: maintenance,
+                obs: obs
+            }
+        })
+        .then((createdMaintenance)=> {
+            console.log("Manutenção criada com sucesso: ", createdMaintenance);
+        })
+        .catch((error) => {
+            console.log("Erro ao criar Manutenção: ", error);
+        });
+        res.status(201).send("Manutenção criada com sucesso")
+
+
+    }catch(error){
+        res.status(500).send("erro")
+    }
+})
+
 app.listen(3000);
 

@@ -23,10 +23,12 @@ export default function MyGarage(){
         setStorage(value)
     };    
     
-    const saveCarStorage = async (carId) => {
+    const saveCarStorage = async (carId, modeloCarro) => {
         console.log("ID carro",carId)
         let carIdString = JSON.stringify(carId);
+        let modeloCarroString = JSON.stringify(modeloCarro)
         AsyncStorage.setItem("idCarStorage", carIdString)
+        AsyncStorage.setItem("nameCarStorage", modeloCarroString)
         navigation.navigate('ManutPage')
     }
 
@@ -41,7 +43,7 @@ export default function MyGarage(){
         {carList
         .filter((item) => item.userId == storage)
         .map((item) => (
-            <CarButton key={item.id} onPress={() => saveCarStorage(item.id)}>
+            <CarButton key={item.id} onPress={() => saveCarStorage(item.id, item.modeloCarro)}>
                 <ButtonText>{item.modeloCarro}</ButtonText> 
             </CarButton>
 ))}
