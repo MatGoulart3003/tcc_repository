@@ -1,7 +1,11 @@
 import axios from 'axios';
+import IpApi from './IpApi';
 
 const apiCar = axios.create({
-    baseURL: 'http://192.168.0.247:3000'
+    
+    baseURL: IpApi
 })
 
 export default apiCar;
+
+//'http://192.168.43.116:3000'

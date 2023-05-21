@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button, Container, Title, ButtonText, ViewRefreshCar, DescriptionText } from "../ManutPage/style";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View } from "react-native";
 import apiCar from "../../../Services/ApiCar";
 
 export default function ManutPage(){

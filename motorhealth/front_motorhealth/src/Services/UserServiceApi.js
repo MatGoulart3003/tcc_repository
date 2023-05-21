@@ -1,6 +1,7 @@
 import axios from "axios"
+import IpApi from './IpApi';
 
-const baseUrl = 'http://192.168.0.247:3000/users';
+const baseUrl = `${IpApi}/users`;
 
 class UserServiceApi {
 
