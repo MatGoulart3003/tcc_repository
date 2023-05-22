@@ -11,13 +11,17 @@ export const Button = styled.TouchableOpacity`
     
 `;
 
-export const Container = styled.SafeAreaView`
-    flex: 1;
+export const Container = styled.ScrollView`
+    flex: 1;  
+    background-color: #363636;  
+    `;
+
+export const ContentContainer = styled.View`
     align-items: center;
     background-color: #363636;
     borter-radius: 50px;
     padding-top: 15px;
-    `;
+`;
 
 export const Title = styled.Text`
 
@@ -30,8 +34,8 @@ export const Title = styled.Text`
 export const CarButton = styled.TouchableOpacity`
     
     justify-content: center;
-    height: 40px;
-    width: 80%;
+    height: 110px;
+    width: 90%;
     paddingertical:8px;
     border-color: #696969;
     border-width: 1px;
@@ -41,7 +45,7 @@ export const CarButton = styled.TouchableOpacity`
 `;
 export const ViewRegisterCar = styled.View`
     justify-content: center;
-    margin-top: 50px;    
+    margin-top: 20px;    
     width: 350px;
     align-items: center;
 
@@ -50,8 +54,12 @@ export const ViewRefreshCar = styled.View`
     justify-content: center;
     margin: 25px;
     width: 350px;
-    align-items: center;
-    position: absolute;
+    align-items: center;    
     bottom:0;
 `;
-
+export const LabelText = styled.Text`
+    font-size: 16px;
+    color: #A9A9A9;
+    padding: 4px;
+    
+`;

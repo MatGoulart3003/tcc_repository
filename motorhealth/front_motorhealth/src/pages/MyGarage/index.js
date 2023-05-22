@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Container, CarButton, ViewRefreshCar, ViewRegisterCar } from "./style";
+import { Button, Container, CarButton, ViewRefreshCar, ViewRegisterCar, LabelText, ContentContainer } from "./style";
 import { ButtonText } from "../Login/styles";
 import apiCar from "../../Services/ApiCar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -39,15 +39,19 @@ export default function MyGarage(){
     searchUserStorage("idUserLoged");   
     return(
     <Container>
+      <ContentContainer>
       
         {carList
         .filter((item) => item.userId == storage)
         .map((item) => (
             <CarButton key={item.id} onPress={() => saveCarStorage(item.id, item.modeloCarro)}>
-                <ButtonText>{item.modeloCarro}</ButtonText> 
+                <LabelText>Modelo: {item.modeloCarro}</LabelText>
+                <LabelText>Marca: {item.marcaCarro}</LabelText> 
+                <LabelText>Ano: {item.anoCarro}</LabelText> 
             </CarButton>
 ))}
-
+      </ContentContainer>
+      <ContentContainer>
         <ViewRegisterCar>
           <Button onPress={() => navigation.navigate('CreateCar')}>
             <ButtonText>Cadastrar Carro</ButtonText>
@@ -55,12 +59,12 @@ export default function MyGarage(){
         </ViewRegisterCar>
 
         <ViewRefreshCar>
-          <Button >
+          <Button>
             <ButtonText onPress={() => getCars()}>Recarregar Carros</ButtonText>
           </Button>
         </ViewRefreshCar>
        
-      
+      </ContentContainer>
     </Container>
 
     );

@@ -44,8 +44,22 @@ export const ViewRefreshCar = styled.View`
 `;
 
 export const DescriptionText = styled.Text`
-    font-size: 20px;
-    font-weight: bold;
-    color: #FFF;
-    margin: 20px;
+    font-size: 16px;
+    color: #A9A9A9;
+    padding: 4px;
 `;
+
+export const ViewManutCar = styled.View`
+    justify-content: center;
+    height: 150px;
+    width: 90%;
+    paddingVertical:8px;
+    border-color: #696969;
+    border-width: 1px;
+    margin-top:12px;
+    border-radius: 5px;
+    
+`;
+
+export const ViewTitle = styled.View`
+`

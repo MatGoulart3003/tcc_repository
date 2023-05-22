@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, ButtonText, Container, TextLogin, TextLogin2, Title, Input } from "./styles";
+import { Button, ButtonText, Container, TextLogin, TextLogin2, Title, Input, ViewCreateUser, ViewLabel } from "./styles";
 import { Alert, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import userServiceApi from "../../Services/UserServiceApi";
@@ -53,37 +53,47 @@ export default function CreateUser() {
 
     return (
         <Container>
-            
-            <Title>Cadastre-se</Title>
-            <TextLogin2>Digite suas credenciais:</TextLogin2>
-            
-            <TextLogin>Usuário</TextLogin>
-            <Input
-              placeholder="Nome do usuário"
-              leftIcon={{ type: 'font-awesome', name:'user'}}
-              onChangeText={value => setUser(value)}
-              />           
-            <TextLogin >Senha</TextLogin>
-            <Input 
-              placeholder="Senha do usuário"
-              leftIcon={{type: 'font-awasome', name: 'lock'}}
-              onChangeText={value => setPassword(value)}
-              secureTextEntry={true}
-            />
-            <Input 
-              placeholder="Confirme sua senha"
-              leftIcon={{type: 'font-awasome', name: 'lock'}}
-              onChangeText={value => setConfirmPass(value)}
-              secureTextEntry={true}
-            />
-            {isLoading &&
-              <Text>Carregando...</Text>
-            }
-            {!isLoading &&                
-              <Button onPress={ () =>  saveUser()}>
-                <ButtonText>Criar</ButtonText>
-              </Button>
-            }
+            <ViewCreateUser>
+                <Title>Cadastre-se</Title>
+                <ViewLabel>
+                    <TextLogin2>Digite suas credenciais:</TextLogin2>
+                </ViewLabel>
+
+                <ViewLabel>
+                    <TextLogin>Usuário:</TextLogin>
+                </ViewLabel>
+
+                <Input
+                placeholder="Nome do usuário"
+                leftIcon={{ type: 'font-awesome', name:'user'}}
+                onChangeText={value => setUser(value)}
+                />           
+
+                <ViewLabel>
+                    <TextLogin >Senha:</TextLogin>
+                </ViewLabel>
+
+                <Input 
+                placeholder="Senha do usuário"
+                leftIcon={{type: 'font-awasome', name: 'lock'}}
+                onChangeText={value => setPassword(value)}
+                secureTextEntry={true}
+                />
+                <Input 
+                placeholder="Confirme sua senha"
+                leftIcon={{type: 'font-awasome', name: 'lock'}}
+                onChangeText={value => setConfirmPass(value)}
+                secureTextEntry={true}
+                />
+                {isLoading &&
+                <Text>Carregando...</Text>
+                }
+                {!isLoading &&                
+                <Button onPress={ () =>  saveUser()}>
+                    <ButtonText>Criar</ButtonText>
+                </Button>
+                }
+            </ViewCreateUser>
         </Container>
     );
 }

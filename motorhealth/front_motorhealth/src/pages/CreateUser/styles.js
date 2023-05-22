@@ -12,12 +12,17 @@ export const Input = styled.TextInput.attrs({
     placeholderTextColor: "#FFFFFF"
   })`
     width: 80%;
-    border-color: black;
-    border-bottom-width: 1px;
     margin-vertical: 10px;
     padding: 10px;
     font-size: 18px;
     color: #FFF
+    background-color: #696969;
+    borderRadius:2px;
+    shadow-color: black;
+    shadow-offset: 0px 2px;
+    shadow-opacity: 0.5;
+    shadow-radius: 50px;
+    elevation: 4;
 `;
 
  export const Button = styled.TouchableOpacity`
@@ -42,7 +47,7 @@ export const Title = styled.Text`
     font-size: 25px;
     color: #FFFFFF;
     font-weight: bold ;
-    bottom: 100px;
+    bottom: 50px;
 
 `;
 export const TextLogin = styled.Text`
@@ -56,4 +61,25 @@ export const TextLogin2 = styled.Text`
     color: #FFFFFF;
     font-weight: bold ;
     bottom: 30px;
+`;
+export const ViewCreateUser = styled.View`
+    height: 80%;
+    width: 90%;
+    borderRadius:10px;
+    paddingVertical:8px;
+    background-color: #4F4F4F;
+    justify-content: center;
+    align-items: center;
+    shadow-color: black;
+    shadow-offset: 0px 2px;
+    shadow-opacity: 0.5;
+    shadow-radius: 50px;
+    elevation: 4;
+`;
+
+export const ViewLabel = styled.View`   
+    width: 100%;
+    background-color: #4F4F4F;
+    padding-left: 40px;
+    padding-top: 30px;
 `;

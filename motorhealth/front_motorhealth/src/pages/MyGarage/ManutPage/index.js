@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Title, ButtonText, ViewRefreshCar, DescriptionText } from "../ManutPage/style";
+import { Button, Container, Title, ButtonText, ViewRefreshCar, DescriptionText, ViewManutCar } from "../ManutPage/style";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiCar from "../../../Services/ApiCar";
@@ -35,14 +35,20 @@ export default function ManutPage(){
     searchCarStorage('idCarStorage')
     return(
         <Container>
-            <Title>Manutenções do {nameVeic} </Title>
-            {listManut
-            .filter((item) => item.idCar == storage)
-            .map((item) => (
             
-            <DescriptionText key={item.id} > {item.descriptionMaintenance} com {item.km} quilometros </DescriptionText>
-
-            ))}
+            <Title>Carro: {nameVeic} </Title>
+               
+                {listManut
+                .filter((item) => item.idCar == storage)
+                .map((item) => (
+                    <ViewManutCar key={item.id} >
+                        <DescriptionText>Descrição: {item.descriptionMaintenance}</DescriptionText>
+                        <DescriptionText>Quilometragem: {item.km} </DescriptionText>
+                        <DescriptionText>Data Prevista: {item.date} </DescriptionText>
+                        <DescriptionText>Obs: {item.obs} </DescriptionText>
+                    </ViewManutCar>
+                ))}
+                
              <Button onPress={() => navigation.navigate('CreateManut')} >
                 <ButtonText>Nova Manutenção</ButtonText>
             </Button>

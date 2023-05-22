@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
-import { ButtonText, Container, Button } from "./styles";
+import { Alert, View } from "react-native";
+import { ButtonText, Container, Button, ViewOptions, ViewPicker, OptionSelectedText, ViewCarSelected, ViewButton } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from '../../Services/Api';
@@ -17,6 +18,7 @@ export default function CreateCar() {
     const [carDetails, setCarDetails] = useState(null);
     const [storage, setStorage] =  useState('')
 
+    const navigation = useNavigation()
 
     const searchUserStorage = async (key) =>{
         const value = await AsyncStorage.getItem(key)
@@ -116,45 +118,86 @@ export default function CreateCar() {
         handleSelectedOptions();
       }, [selectedOption1, selectedOption2, selectedOption3]);
     
+    const saveCar = (carDetails) => {
+      carServiceApi.createCar(carDetails)
+      Alert.alert('Sucesso!', 'Carro salvo com sucesso!')
+      navigation.navigate('MyGarage')
+    }
+    
     return (
       <Container>
-        <ButtonText>Selecione a marca do carro:</ButtonText>
-        <RNPickerSelect
-          items={options1}
-          placeholder={{ label: 'Selecione a Marca:', value: null }}
-          onValueChange={(value) => {
-            setSelectedOption1(value);
-          }}
-        />
-        <ButtonText>Selecione o Modelo</ButtonText>
-        <RNPickerSelect
-          placeholder={{label: 'Selecione o Modelo:', value: null }}  
-          onValueChange={value => setSelectedOption2(value)}
-          items={options2}
-          disabled={!selectedOption1}
-        />
-        <ButtonText>Selecione o Ano e Combustivel</ButtonText>
-        <RNPickerSelect
-          placeholder={{label: 'Selecione o Ano e Combustivel:'}}  
-          onValueChange={value => setSelectedOption3(value)}
-          items={options3}
-          disabled={!selectedOption2}
-        />
-        {carDetails ? (
-            <View>
-                <ButtonText>Marca: {carDetails.marcaCarro}</ButtonText>
-                <ButtonText>Modelo: {carDetails.modeloCarro}</ButtonText>
-                <ButtonText>Ano: {carDetails.anoCarro}</ButtonText>
-                <ButtonText>Combustivel: {carDetails.combustivel}</ButtonText>
-                <ButtonText>ID usuário: {carDetails.userId}</ButtonText>
-               
-                <Button onPress={() => carServiceApi.createCar(carDetails)}>
-                  <ButtonText>Salvar</ButtonText>
-                </Button>
 
-            </View>
+        <ViewOptions>
+          <ButtonText>Selecione a marca do carro:</ButtonText>
+          <ViewPicker> 
+            <RNPickerSelect
+              style={{
+                inputAndroid: {                    
+                  color: 'white'                   
+                }
+              }}
+              items={options1}
+              placeholder={{ label: 'Selecione a Marca:', value: null }}
+              onValueChange={(value) => {
+                setSelectedOption1(value);
+              }}
+              
+            />
+            </ViewPicker>
+          </ViewOptions>
+          
+          <ViewOptions>
+            <ButtonText>Selecione o Modelo</ButtonText>
+            <ViewPicker>  
+              <RNPickerSelect
+                placeholder={{label: 'Selecione o Modelo:', value: null }}  
+                onValueChange={value => setSelectedOption2(value)}
+                items={options2}
+                disabled={!selectedOption1}
+                style={{
+                  inputAndroid: {                    
+                    color: 'white'                   
+                  }
+                }}
+              />
+            </ViewPicker>
+          </ViewOptions>
+          
+          <ViewOptions>
+            <ButtonText>Selecione o Ano e Combustivel</ButtonText>
+            <ViewPicker>
+            <RNPickerSelect
+              placeholder={{label: 'Selecione o Ano e Combustivel:'}}  
+              onValueChange={value => setSelectedOption3(value)}
+              items={options3}
+              disabled={!selectedOption2}
+              style={{
+                inputAndroid: {                    
+                  color: 'white'                   
+                }
+              }}
+            />
+            </ViewPicker>
+          </ViewOptions>
+
+
+        {carDetails ? (
+            <ViewCarSelected>
+                <OptionSelectedText>Marca: {carDetails.marcaCarro}</OptionSelectedText>
+                <OptionSelectedText>Modelo: {carDetails.modeloCarro}</OptionSelectedText>
+                <OptionSelectedText>Ano: {carDetails.anoCarro}</OptionSelectedText>
+                <OptionSelectedText>Combustivel: {carDetails.combustivel}</OptionSelectedText>
+                <OptionSelectedText>ID usuário: {carDetails.userId}</OptionSelectedText>
+                
+                  <Button onPress={() => saveCar(carDetails)}>
+                    <ButtonText>Salvar</ButtonText>
+                  </Button>
+                
+
+            </ViewCarSelected>            
+            
             ) : (
-                 <ButtonText>Preencha os dados acima</ButtonText>
+                 <OptionSelectedText>Preencha os dados acima</OptionSelectedText>
         )}
               
       </Container>

@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import Api from "../../Services/ApiCar"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { Button, ButtonText, Container, Title, TextLogin, Input } from "./styles";
+import { Button, ButtonText, Container, Title, TextLogin, Input, ViewLogin, ViewLabel } from "./styles";
 import { Alert } from "react-native";
 import userServiceApi from "../../Services/UserServiceApi";
 
@@ -68,23 +68,33 @@ export default function Login() {
     return (
         <Container>
             
-            <Title>Bem Vindo!!</Title>
-            <TextLogin>Usuário</TextLogin>
-            <Input
-              placeholder="Nome do usuário"
-              leftIcon={{ type: 'font-awesome', name:'user'}}
-              onChangeText={value => setUsername(value)}
-              />           
-            <TextLogin >Senha</TextLogin>
-            <Input 
-              placeholder="Senha do usuário"
-              leftIcon={{type: 'font-awasome', name: 'lock'}}
-              onChangeText={value => setPassword(value)}
-              secureTextEntry={true}
-            />
-            <Button onPress={() => autenticateUser()}>
-                <ButtonText>Login</ButtonText>
-            </Button>
+            <ViewLogin>
+
+              <Title>Bem Vindo!!</Title>
+
+                <ViewLabel>
+                  <TextLogin>Usuário: </TextLogin>
+                </ViewLabel>
+
+                <Input
+                  placeholder="Nome do usuário"
+                  onChangeText={value => setUsername(value)}
+                  />  
+
+                <ViewLabel>       
+                  <TextLogin >Senha: </TextLogin>
+                </ViewLabel>
+
+                <Input 
+                  placeholder="Senha do usuário"
+                  onChangeText={value => setPassword(value)}
+                  secureTextEntry={true}
+                />
+                <Button onPress={() => autenticateUser()}>
+                    <ButtonText>Login</ButtonText>
+                </Button>
+              
+            </ViewLogin>
         </Container>
     );
 }

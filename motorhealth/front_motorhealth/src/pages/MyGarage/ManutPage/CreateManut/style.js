@@ -68,8 +68,7 @@ export const ViewPicker = styled.View`
     margin: 25px;
     border-color: #A9A9A9;
     border-width: 1px;
-    border-radius: 5px;
-    
+    border-radius: 5px;   
    
 `;
 export const ViewDateKM = styled.View`
