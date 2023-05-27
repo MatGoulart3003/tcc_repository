@@ -145,6 +145,11 @@ export default function CreateManut(){
                     <ButtonText>Salvar</ButtonText>
                 </Button>
             </ViewSave>
+            <ViewSave>
+                <Button onPress={() => navigation.navigate('RecommendedManut')} >
+                    <ButtonText>Recomendação:</ButtonText>
+                </Button>
+            </ViewSave>
         </Container>
     );
   };

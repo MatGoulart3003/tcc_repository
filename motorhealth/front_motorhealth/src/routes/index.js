@@ -7,6 +7,7 @@ import MyGarage from "../pages/MyGarage"
 import CreateCar from "../pages/CreateCar"
 import ManutPage from "../pages/MyGarage/ManutPage";
 import CreateManut from "../pages/MyGarage/ManutPage/CreateManut";
+import RecommendedManut from "../pages/MyGarage/ManutPage/CreateManut/RecommendManut";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,8 +38,7 @@ export default function Routes(){
                             backgroundColor: '#4F4F4F'
                         },
                         headerTintColor:'#FFF'
-                    }}
-                
+                    }}                
             />
             <Stack.Screen
                 name="CreateCar"
@@ -66,6 +66,17 @@ export default function Routes(){
                         headerTintColor:'#FFF'
                     }}
                 
+            />
+            <Stack.Screen
+                name="RecommendedManut"
+                component={RecommendedManut}
+                options={{                     
+                    title: 'Recomendação de Manutenção',                   
+                    headerStyle:{
+                            backgroundColor: '#4F4F4F'
+                        },
+                        headerTintColor:'#FFF'
+                    }}                
             />
 
         </Stack.Navigator>

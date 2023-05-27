@@ -102,7 +102,7 @@ app.post ('/users/login', async (req,res)=>{
 })
 
 app.post ('/usersCars/create', async (req,res) =>{
-    const {anoCarro,combustivel,marcaCarro,modeloCarro,userId} = req.body
+    const {anoCarro,combustivel,marcaCarro,modeloCarro,userId, codigoFipe} = req.body
     try{
         let userIdNumber = parseInt(userId);
         const prismaCar = prisma.car.create({
@@ -111,7 +111,8 @@ app.post ('/usersCars/create', async (req,res) =>{
               combustivel: combustivel,
               marcaCarro: marcaCarro,
               modeloCarro: modeloCarro,
-              userId:userIdNumber
+              userId:userIdNumber,
+              codigoFipe: codigoFipe
             }
           })
           .then((createdCar) => {

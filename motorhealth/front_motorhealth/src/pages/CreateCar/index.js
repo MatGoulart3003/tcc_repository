@@ -83,6 +83,7 @@ export default function CreateCar() {
             modeloCarro: response.data.Modelo,
             anoCarro: response.data.AnoModelo,
             combustivel: response.data.Combustivel,
+            codigoFipe: response.data.CodigoFipe,
             userId: storage
           };
           return formattedData;
@@ -188,7 +189,8 @@ export default function CreateCar() {
                 <OptionSelectedText>Ano: {carDetails.anoCarro}</OptionSelectedText>
                 <OptionSelectedText>Combustivel: {carDetails.combustivel}</OptionSelectedText>
                 <OptionSelectedText>ID usuário: {carDetails.userId}</OptionSelectedText>
-                
+                <OptionSelectedText>Codigo Fipe: {carDetails.codigoFipe}</OptionSelectedText>
+
                   <Button onPress={() => saveCar(carDetails)}>
                     <ButtonText>Salvar</ButtonText>
                   </Button>

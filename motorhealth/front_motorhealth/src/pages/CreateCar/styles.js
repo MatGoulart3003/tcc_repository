@@ -96,7 +96,7 @@ export const ViewCarSelected = styled.View`
     border-width: 1px;
     border-radius: 5px;
     align-itens: center;
-    height: 220px;
+    height: 235px;
     width: 90%;   
 `;
 
