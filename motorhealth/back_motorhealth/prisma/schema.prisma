@@ -43,3 +43,19 @@ model Maintenance {
   @@map("maintenances")
 }
 
+model RecommendedMaint {
+  id Int @id @default(autoincrement())
+  codigo_fipe String
+  maintenances_for_recommend MaintenancesForRecommend[]
+  @@map("recommendeds_maints")
+}
+
+model MaintenancesForRecommend {
+  id Int @id@default(autoincrement())
+  description_maintenance String
+  km String
+  obs String
+  recommended_maint RecommendedMaint @relation(fields: [id_recommended_maint], references: [id])
+  id_recommended_maint Int
+  @@map("maintenances_for_recommend")
+}

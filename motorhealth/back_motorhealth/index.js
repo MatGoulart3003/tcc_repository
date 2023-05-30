@@ -28,6 +28,22 @@ const manut = [
     {id:18, name: 'Outro, Especifique Na OBS'}
 ]
 
+app.get('/recommendedMaint', async (req,res)=>{
+    const maintenances = await prisma.recommendedMaint.findMany()
+    res.json(maintenances);
+})
+
+app.get('/recommendedMaint/:id', async (req,res)=>{
+    
+    const id = parseInt(req.params.id)
+    console.log(id)
+    const maintenancesForRecommend = await prisma.maintenancesForRecommend.findMany({
+        where:{
+            id_recommended_maint:id
+        }
+    })
+    res.json(maintenancesForRecommend);
+})
 
 app.get('/maintenance', (req,res)=>{
     res.json(manut)
