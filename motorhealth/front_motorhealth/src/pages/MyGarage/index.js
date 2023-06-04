@@ -23,12 +23,15 @@ export default function MyGarage(){
         setStorage(value)
     };    
     
-    const saveCarStorage = async (carId, modeloCarro) => {
+    const saveCarStorage = async (carId, modeloCarro, codigoFipe) => {
         console.log("ID carro",carId)
         let carIdString = JSON.stringify(carId);
         let modeloCarroString = JSON.stringify(modeloCarro)
+        let codigoFipeString = JSON.stringify(codigoFipe)
+
         AsyncStorage.setItem("idCarStorage", carIdString)
         AsyncStorage.setItem("nameCarStorage", modeloCarroString)
+        AsyncStorage.setItem("codigoFipeStorage", codigoFipeString)
         navigation.navigate('ManutPage')
     }
 
@@ -44,7 +47,7 @@ export default function MyGarage(){
         {carList
         .filter((item) => item.userId == storage)
         .map((item) => (
-            <CarButton key={item.id} onPress={() => saveCarStorage(item.id, item.modeloCarro)}>
+            <CarButton key={item.id} onPress={() => saveCarStorage(item.id, item.modeloCarro, item.codigoFipe)}>
                 <LabelText>Modelo: {item.modeloCarro}</LabelText>
                 <LabelText>Marca: {item.marcaCarro}</LabelText> 
                 <LabelText>Ano: {item.anoCarro}</LabelText> 

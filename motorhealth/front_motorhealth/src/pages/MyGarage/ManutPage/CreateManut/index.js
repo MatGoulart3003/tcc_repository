@@ -10,7 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import maintenanceServiceApi from "../../../../Services/MaintenanceApi";
-
+import apiCar from "../../../../Services/ApiCar";
 
 export default function CreateManut(){
 
@@ -22,6 +22,12 @@ export default function CreateManut(){
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [obs, setObs] = useState('obs')
+    const [recommendedMaints, setRecommendedMaints] = useState ([]);    
+    const [maintenancesForRecommend, setMaintenancesForRecommend] = useState ([]);
+    const [codigoFipe, setCodigoFipe] = useState()
+    const [isValid, setIsValid] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('');
+
 
     const navigation = useNavigation()
 
@@ -53,23 +59,43 @@ export default function CreateManut(){
     };
 
     const getManuts = async () => {
+        
         try{
             const response = await Api.get('/maintenance')
+            
             const formattedData = response.data.map(item =>({
                 label: item.name,
                 value: item.id
             }))
             setManutOptions(formattedData)
-            console.log(formattedData)
         }catch(error){
             console.log(error)
         }
     };
     
+    const getCodigoFipe = async () =>{
+        let codigoStorage = await AsyncStorage.getItem('codigoFipeStorage')
+        setCodigoFipe(codigoStorage)
+    }
+    const checkCodIsValid = () => {
+        console.log(recommendedMaints)
+        recommendedMaints?.forEach(item => {
+            const string = JSON.stringify(item.codigo_fipe)
+           
+            if(codigoFipe == string){
+                console.log(codigoFipe)
+                getRecommendedManutsByCar(item.id)
+                setIsValid(true)
+            }
+        });
+    } 
     useEffect(() => {
         getManuts();
-      }, []);
+        getCodigoFipe();
+        getRecommendedManuts()
 
+      }, []);
+      
     const saveManut = async () => {
 
         const formattedDate = moment(date).format('DD/MM/YYYY')
@@ -90,6 +116,27 @@ export default function CreateManut(){
         navigation.navigate('ManutPage')
     }
 
+    const getRecommendedManuts = async () => {
+        const result = await apiCar.get('/recommendedMaint')       
+        setRecommendedMaints(result.data)
+    }
+
+    const getRecommendedManutsByCar = async (ID) => {
+        try{
+            const response = await apiCar.get(`/recommendedMaint/${ID}`)
+            const formattedData = response.data.map(item => ({
+                label: item.obs,
+                value: item.id_recommended_maint,
+                
+            }))
+            setMaintenancesForRecommend(formattedData)
+        }catch(error){
+            console.log(error)
+        }
+   
+    }
+
+    
     return (
         
         <Container>
@@ -145,11 +192,37 @@ export default function CreateManut(){
                     <ButtonText>Salvar</ButtonText>
                 </Button>
             </ViewSave>
+            
+            
+        
+            {isValid ? (
+            <ViewPicker>
+                <RNPickerSelect
+                  placeholder={{label: 'Selecione uma parada'}} 
+                  items={maintenancesForRecommend}
+                  onValueChange={(value) => {
+                    setSelectedOption(value);
+                  }}
+                  style={{
+                    inputAndroid: {                    
+                      color: 'white'                   
+                    }
+                  }}
+                />
+            </ViewPicker>
+            
+            ) : (               
+            
             <ViewSave>
-                <Button onPress={() => navigation.navigate('RecommendedManut')} >
-                    <ButtonText>Recomendação:</ButtonText>
+                <Button onPress={() => checkCodIsValid()} >
+                    <ButtonText>Checar Manut</ButtonText>
                 </Button>
             </ViewSave>
+           
+            )
+            }
         </Container>
+
+        
     );
   };
