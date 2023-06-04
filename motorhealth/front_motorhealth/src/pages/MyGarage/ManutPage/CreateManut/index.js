@@ -7,7 +7,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Api from "../../../../Services/ApiCar";
 import moment from 'moment'
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import maintenanceServiceApi from "../../../../Services/MaintenanceApi";
 import apiCar from "../../../../Services/ApiCar";
@@ -21,15 +21,39 @@ export default function CreateManut(){
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [obs, setObs] = useState('obs')
+    const [obs, setObs] = useState('')
     const [recommendedMaints, setRecommendedMaints] = useState ([]);    
     const [maintenancesForRecommend, setMaintenancesForRecommend] = useState ([]);
     const [codigoFipe, setCodigoFipe] = useState()
     const [isValid, setIsValid] = useState(false)
+    const [isPressed, setIsPressed] = useState(false)
     const [selectedOption, setSelectedOption] = useState('');
 
 
     const navigation = useNavigation()
+
+    const lala = () => {
+        console.log(selectedOption)
+            
+    }
+
+    const newMaintenanceRecommended = (value, index) =>{
+        setSelectedOption(value);
+        if(maintenancesForRecommend[index] != undefined) {
+            console.log(maintenancesForRecommend[index].km)
+            setKm(maintenancesForRecommend[index].km)
+            setObs(maintenancesForRecommend[index].label)
+            setManutDescriptionSelected(maintenancesForRecommend[index].description)
+            manutOptions.forEach(element => {
+               
+                if(element.label == maintenancesForRecommend[index].description){
+                    setManutSelected(element.value)
+                }
+            });
+           
+        }      
+        
+    }
 
     const pickerStyle = {
         inputAndroid: {
@@ -78,6 +102,8 @@ export default function CreateManut(){
         setCodigoFipe(codigoStorage)
     }
     const checkCodIsValid = () => {
+
+        setIsPressed(true)
         console.log(recommendedMaints)
         recommendedMaints?.forEach(item => {
             const string = JSON.stringify(item.codigo_fipe)
@@ -86,16 +112,11 @@ export default function CreateManut(){
                 console.log(codigoFipe)
                 getRecommendedManutsByCar(item.id)
                 setIsValid(true)
+                setIsPressed(true)
             }
         });
     } 
-    useEffect(() => {
-        getManuts();
-        getCodigoFipe();
-        getRecommendedManuts()
-
-      }, []);
-      
+        
     const saveManut = async () => {
 
         const formattedDate = moment(date).format('DD/MM/YYYY')
@@ -125,8 +146,11 @@ export default function CreateManut(){
         try{
             const response = await apiCar.get(`/recommendedMaint/${ID}`)
             const formattedData = response.data.map(item => ({
-                label: item.obs,
-                value: item.id_recommended_maint,
+                value: item.id,
+                label: item.obs,                
+                description: item.description_maintenance,
+                idRecommended: item.id_recommended_maint,
+                km: item.km
                 
             }))
             setMaintenancesForRecommend(formattedData)
@@ -136,6 +160,16 @@ export default function CreateManut(){
    
     }
 
+    useEffect(() => {
+        getManuts();
+        getCodigoFipe();
+        getRecommendedManuts()
+
+      }, []);
+
+    useEffect(() =>{
+
+    }, [])
     
     return (
         
@@ -160,8 +194,8 @@ export default function CreateManut(){
                     <Input
                         placeholder= "Quilometragem, Ex: 20000" 
                         keyboardType='numeric'   
-                        onChangeText={value => setKm(value)}  
-                                      
+                        onChangeText={value => setKm(value)}
+                        value={km}                                      
                     />
 
                 </ViewKM>
@@ -177,6 +211,7 @@ export default function CreateManut(){
                     }}                                  
                     items={manutOptions}
                     style={pickerStyle}
+                    value={manutSelected}
                 />
             </ViewPicker>
             <ViewObs>
@@ -185,42 +220,70 @@ export default function CreateManut(){
                     numberOfLines={6}
                     placeholder="Observações: (Opcional)"
                     onChangeText={value => setObs(value)}
+                    value={obs}
                 />
             </ViewObs>
-            <ViewSave>
-                <Button onPress={() => saveManut()} >
-                    <ButtonText>Salvar</ButtonText>
-                </Button>
-            </ViewSave>
             
             
-        
-            {isValid ? (
-            <ViewPicker>
-                <RNPickerSelect
-                  placeholder={{label: 'Selecione uma parada'}} 
-                  items={maintenancesForRecommend}
-                  onValueChange={(value) => {
-                    setSelectedOption(value);
-                  }}
-                  style={{
-                    inputAndroid: {                    
-                      color: 'white'                   
-                    }
-                  }}
-                />
-            </ViewPicker>
             
-            ) : (               
-            
-            <ViewSave>
-                <Button onPress={() => checkCodIsValid()} >
-                    <ButtonText>Checar Manut</ButtonText>
-                </Button>
-            </ViewSave>
-           
-            )
-            }
+            {!isPressed && (
+                <>
+                    <ViewSave>
+                        <Button onPress={() => saveManut()} >
+                            <ButtonText>Salvar</ButtonText>
+                        </Button>
+                    </ViewSave>
+                        <ViewSave>
+                        <Button onPress={checkCodIsValid}>
+                            <ButtonText>Checar Manutenções</ButtonText>
+                        </Button>
+                    </ViewSave>
+                </>
+            )}
+
+            {isPressed && (
+                <>
+                {isValid ? (
+                    <>
+                    <ViewPicker>
+                    <RNPickerSelect
+                        placeholder={{ label: 'Selecione:', value: null }}
+                        onValueChange={(value, index) => {
+                            newMaintenanceRecommended(value, index-1)                                                     
+                        }}
+                        items={maintenancesForRecommend}
+                        style={{
+                        inputAndroid: {
+                            color: 'white',
+                        },
+                        }}
+                    />  
+
+                    </ViewPicker>
+
+                    <ViewSave>
+                        <Button onPress={() => saveManut()} >
+                            <ButtonText>Salvar</ButtonText>
+                        </Button>
+                    </ViewSave>
+                    </>
+                                        
+                ) : (
+                    <>
+                        <ViewSave>
+                            <ButtonText>Manutenção recomendada não disponível no momento.</ButtonText>
+                        </ViewSave>
+                        
+                        <ViewSave>
+                            <Button onPress={() => saveManut()} >
+                                <ButtonText>Salvar</ButtonText>
+                            </Button>
+                        </ViewSave>
+                        
+                    </>
+                )}
+                </>
+            )}
         </Container>
 
         

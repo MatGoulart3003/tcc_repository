@@ -113,4 +113,5 @@ export const InputObs = styled.TextInput.attrs({
 export const ViewSave = styled.View`
     align-items: center;
     padding: 20px;
+    padding-top:30px;
 `
