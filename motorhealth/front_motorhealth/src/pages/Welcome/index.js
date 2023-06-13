@@ -12,14 +12,17 @@ export default function Welcome() {
             <View style={styles.containerLogo}> 
                 <Image
                     source={require('../../assets/logo.png')}
-                    style={{ width: '100%', alignSelf: 'center'}}
+                    style={{ 
+                        width: '100%', 
+                        alignSelf: 'center'
+                    }}
                     resizeMode="contain"
                 />
                 <Text style={styles.motorhealthText}>MotorHealth</Text>
             </View>
 
             <View style={styles.conternerIterationArea}>
-                <Text style={styles.welcome}>Bem vindo ao MotorHealth!</Text>
+                <Text style={styles.welcome}>Bem vindo!</Text>
                 <TouchableOpacity
                 style={styles.loginButton}
                 onPress={ () => navigation.navigate('Login')}>

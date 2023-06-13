@@ -32,10 +32,7 @@ export default function CreateManut(){
 
     const navigation = useNavigation()
 
-    const lala = () => {
-        console.log(selectedOption)
-            
-    }
+   
 
     const newMaintenanceRecommended = (value, index) =>{
         setSelectedOption(value);
