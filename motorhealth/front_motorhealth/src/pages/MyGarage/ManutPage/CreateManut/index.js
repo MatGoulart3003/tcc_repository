@@ -16,7 +16,7 @@ import * as Notifications from 'expo-notifications';
 
 export default function CreateManut(){
 
-    const [km, setKm] = useState(0)
+    const [km, setKm] = useState('')
     const [manutOptions, setManutOptions] = useState([])
     const [manutSelected, setManutSelected]= useState()
     const [manutDescriptionSelected, setManutDescriptionSelected] = useState('')
@@ -30,7 +30,7 @@ export default function CreateManut(){
     const [isValid, setIsValid] = useState(false)
     const [isPressed, setIsPressed] = useState(false)
     const [selectedOption, setSelectedOption] = useState('');
-
+    
 
     const navigation = useNavigation()
 
@@ -311,6 +311,7 @@ export default function CreateManut(){
                         <ContentContainer>
                             <ViewSave>
                                 <LabelText>Manutenção recomendada não disponível no momento.</LabelText>
+                              
                             </ViewSave>
                                                     
                             <ViewSave>

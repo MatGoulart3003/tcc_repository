@@ -54,7 +54,7 @@ export const ButtonDate = styled.TouchableOpacity`
     
 `;
 export const ViewDate = styled.View`
-    justify-content: center;
+   
     margin-top: 15px;
     margin-left: 5px;
     border-color: #A9A9A9;
@@ -65,7 +65,7 @@ export const ViewDate = styled.View`
     width: 140px;
 `;
 export const ViewPicker = styled.View`
-    justify-content: center;
+   
     margin: 25px;
     color: #FFF;
     margin-left: 5px;
@@ -117,7 +117,7 @@ export const InputObs = styled.TextInput.attrs({
 export const ViewSave = styled.View`
     align-items: center;
     padding: 20px;
-    padding-top:30px;
+   
 `;
     export const ContentContainer = styled.View`
     
