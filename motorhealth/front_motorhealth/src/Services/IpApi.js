@@ -1,4 +1,4 @@
-const IpApi = 'http://192.168.204.116:3000'
+const IpApi = 'http://192.168.0.247:3000'
 
 export default IpApi;
 

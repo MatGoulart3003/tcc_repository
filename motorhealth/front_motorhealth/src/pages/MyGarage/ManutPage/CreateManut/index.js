@@ -11,6 +11,8 @@ import { Alert, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import maintenanceServiceApi from "../../../../Services/MaintenanceApi";
 import apiCar from "../../../../Services/ApiCar";
+import * as Notifications from 'expo-notifications';
+
 
 export default function CreateManut(){
 
@@ -32,8 +34,41 @@ export default function CreateManut(){
 
     const navigation = useNavigation()
 
-   
+    const handleCallNotifications = async (dateMaintenance) => {
+        const {status} = await Notifications.getPermissionsAsync();
 
+        if (status !== 'granted'){
+            console.log("voce nao deixou as notificações ativas")
+
+            return;
+        }        
+        const newDate = new Date(dateMaintenance)
+        const currentDate = new Date()
+        
+        var anoStr = String(newDate.getFullYear());
+        var mesStr = String(newDate.getMonth() + 1).padStart(2, '0');
+        var diaStr = String(newDate.getDate()).padStart(2, '0');
+        var horaStr = String(currentDate.getHours()).padStart(2, '0')
+        var minutoStr = String(currentDate.getMinutes()).padStart(2, '0')
+        var segundoStr = String(currentDate.getSeconds()).padStart(2, '0')
+
+        var dataStr = anoStr + "-" + mesStr + "-" + diaStr;
+        var dataHoraStr = dataStr + " " + horaStr + ":" + minutoStr + ":" + segundoStr;
+
+        var data = new Date(dataStr);
+        var dataHora = new Date(dataHoraStr);
+
+        const trigger = dataHora.setSeconds(dataHora.getSeconds() + 3)
+        console.log(trigger)      
+          
+        await Notifications.scheduleNotificationAsync({
+            content:{
+                title: 'Manutenção agendada para hoje!',
+                body: `${manutDescriptionSelected} com ${km} Km!!`,
+            },
+            trigger: trigger
+        })
+    }
     const newMaintenanceRecommended = (value, index) =>{
         setSelectedOption(value);
         if(maintenancesForRecommend[index] != undefined) {
@@ -130,6 +165,7 @@ export default function CreateManut(){
 
         console.log(manut)
         maintenanceServiceApi.createCar(manut)
+        handleCallNotifications(date)
         Alert.alert('Sucesso!', 'Manutenção salva com sucesso!')
         navigation.navigate('ManutPage')
     }
@@ -270,7 +306,7 @@ export default function CreateManut(){
                         <ViewSave>
                             <ButtonText>Manutenção recomendada não disponível no momento.</ButtonText>
                         </ViewSave>
-                        
+                                                
                         <ViewSave>
                             <Button onPress={() => saveManut()} >
                                 <ButtonText>Salvar</ButtonText>
