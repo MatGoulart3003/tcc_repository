@@ -1,10 +1,8 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
     flex: 1;
-    align-items: center;
     background-color: #363636;
-    borter-radius: 50px;
 `;
 
 
@@ -77,7 +75,7 @@ export const ViewPicker = styled.View`
     justify-content: center;
     height: 60px;
     margin: 10px;
-    border-color: #A9A9A9;
+    border-color: #FFFF;
     border-width: 1px;
     border-radius: 5px;
     background-color: #4F4F4F;
@@ -86,21 +84,43 @@ export const ViewPicker = styled.View`
 
 export const OptionSelectedText = styled.Text`
     font-size: 16px;
-    color: white;
+    color: #FFFF;
     padding: 4px;
+    margin-left:10px;
 `;
 
 export const ViewCarSelected = styled.View`
 
     border-color: #A9A9A9;
-    border-width: 1px;
-    border-radius: 5px;
     align-itens: center;
     height: 235px;
     width: 90%;   
+    justify-content: center;
+    margin:6px;
+    shadow-color: black;
+    shadow-offset: 0px 2px;
+    shadow-opacity: 0.5;
+    shadow-radius: 100%;
+    elevation: 4;
 `;
 
 export const ViewButton = styled.View`
     text-align: center;
 
+`;
+
+export const ContentContainer = styled.View`
+    align-items: center;
+    background-color: #4F4F4F;
+    border-radius: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+    border-radius: 5px;
+    border-radius: 5px;
+    shadow-color: #FFFF;
+    shadow-offset: 2px 4px;
+    shadow-opacity: 0.5;
+    shadow-radius: 100%;
+    elevation: 4;
 `;

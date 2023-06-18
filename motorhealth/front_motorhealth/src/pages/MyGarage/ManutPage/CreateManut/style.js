@@ -40,12 +40,13 @@ export const Input = styled.TextInput.attrs({
     width: 183px;
     border-color: black;
     font-size: 14px;
-    color: #A9A9A9;
+    color: #FFF;
 `;
 
 export const LabelText = styled.Text`
     font-size: 16px;
-    color: #A9A9A9;
+    color: #FFF;
+    text-align: center;
 `;
 
 export const ButtonDate = styled.TouchableOpacity`
@@ -55,7 +56,7 @@ export const ButtonDate = styled.TouchableOpacity`
 export const ViewDate = styled.View`
     justify-content: center;
     margin-top: 15px;
-    margin-left: 25px;
+    margin-left: 5px;
     border-color: #A9A9A9;
     border-width: 1px;
     padding: 10px;
@@ -66,6 +67,9 @@ export const ViewDate = styled.View`
 export const ViewPicker = styled.View`
     justify-content: center;
     margin: 25px;
+    color: #FFF;
+    margin-left: 5px;
+    margin-right: 5px;
     border-color: #A9A9A9;
     border-width: 1px;
     border-radius: 5px;   
@@ -91,8 +95,8 @@ export const ViewKM = styled.View`
 `
 export const ViewObs = styled.View`
     justify-content: center;
-    margin-top: 15px;
-    margin-left: 25px;
+    margin-top: 5px;
+    margin-left: 5px;
     border-color: #A9A9A9;
     border-width: 1px;
     padding: 10px;
@@ -108,10 +112,24 @@ export const InputObs = styled.TextInput.attrs({
     width: 345px;
     border-color: black;
     font-size: 16px;
-    color: #A9A9A9;
+    color: #FFF;
 `;
 export const ViewSave = styled.View`
     align-items: center;
     padding: 20px;
     padding-top:30px;
-`
+`;
+    export const ContentContainer = styled.View`
+    
+    background-color: #4F4F4F;
+    padding-bottom: 20px;
+    margin-left: 5%;
+    margin-right:5%;
+    margin-top: 5%;
+    border-radius: 5px;
+    shadow-color: #FFFF;
+    shadow-offset: 2px 4px;
+    shadow-opacity: 0.5;
+    shadow-radius: 100%;
+    elevation: 4;
+`;

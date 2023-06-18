@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Container, Button, ButtonText, 
     Input, ViewKM, ViewDateKM, LabelText,ButtonDate, ViewDate, 
-    ViewPicker, ViewObs, InputObs, ViewSave} from "../CreateManut/style";
+    ViewPicker, ViewObs, InputObs, ViewSave, ContentContainer} from "../CreateManut/style";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import Api from "../../../../Services/ApiCar";
@@ -207,6 +207,7 @@ export default function CreateManut(){
     return (
         
         <Container>
+            <ContentContainer>
             <ViewDateKM>
                 <ViewDate>
                     <ButtonDate onPress={showDatepicker}>
@@ -256,11 +257,13 @@ export default function CreateManut(){
                     value={obs}
                 />
             </ViewObs>
-            
+        </ContentContainer>    
             
             
             {!isPressed && (
+
                 <>
+                <ContentContainer>
                     <ViewSave>
                         <Button onPress={() => saveManut()} >
                             <ButtonText>Salvar</ButtonText>
@@ -271,6 +274,7 @@ export default function CreateManut(){
                             <ButtonText>Checar Manutenções</ButtonText>
                         </Button>
                     </ViewSave>
+                </ContentContainer>
                 </>
             )}
 
@@ -278,40 +282,43 @@ export default function CreateManut(){
                 <>
                 {isValid ? (
                     <>
-                    <ViewPicker>
-                    <RNPickerSelect
-                        placeholder={{ label: 'Selecione:', value: null }}
-                        onValueChange={(value, index) => {
-                            newMaintenanceRecommended(value, index-1)                                                     
-                        }}
-                        items={maintenancesForRecommend}
-                        style={{
-                        inputAndroid: {
-                            color: 'white',
-                        },
-                        }}
-                    />  
+                    <ContentContainer>
+                        <ViewPicker>
+                            <RNPickerSelect
+                                placeholder={{ label: 'Selecione:', value: null }}
+                                onValueChange={(value, index) => {
+                                    newMaintenanceRecommended(value, index-1)                                                     
+                                }}
+                                items={maintenancesForRecommend}
+                                style={{
+                                inputAndroid: {
+                                    color: '#FFF',
+                                },
+                                }}
+                            />  
 
-                    </ViewPicker>
-
-                    <ViewSave>
-                        <Button onPress={() => saveManut()} >
-                            <ButtonText>Salvar</ButtonText>
-                        </Button>
-                    </ViewSave>
+                        </ViewPicker>
+                            <ViewSave>
+                                <Button onPress={() => saveManut()} >
+                                    <ButtonText>Salvar</ButtonText>
+                                </Button>
+                            </ViewSave>
+                    </ContentContainer>
                     </>
                                         
                 ) : (
                     <>
-                        <ViewSave>
-                            <ButtonText>Manutenção recomendada não disponível no momento.</ButtonText>
-                        </ViewSave>
-                                                
-                        <ViewSave>
-                            <Button onPress={() => saveManut()} >
-                                <ButtonText>Salvar</ButtonText>
-                            </Button>
-                        </ViewSave>
+                        <ContentContainer>
+                            <ViewSave>
+                                <LabelText>Manutenção recomendada não disponível no momento.</LabelText>
+                            </ViewSave>
+                                                    
+                            <ViewSave>
+                                <Button onPress={() => saveManut()} >
+                                    <ButtonText>Salvar</ButtonText>
+                                </Button>
+                            </ViewSave>
+                        </ContentContainer>
                         
                     </>
                 )}

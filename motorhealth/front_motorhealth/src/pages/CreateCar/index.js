@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Alert, View } from "react-native";
-import { ButtonText, Container, Button, ViewOptions, ViewPicker, OptionSelectedText, ViewCarSelected, ViewButton } from "./styles";
+import { ButtonText, Container, Button, ViewOptions, ViewPicker, OptionSelectedText, ViewCarSelected, ViewButton, ContentContainer } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -127,62 +127,63 @@ export default function CreateCar() {
     
     return (
       <Container>
-
-        <ViewOptions>
-          <ButtonText>Selecione a marca do carro:</ButtonText>
-          <ViewPicker> 
-            <RNPickerSelect
-              style={{
-                inputAndroid: {                    
-                  color: 'white'                   
-                }
-              }}
-              items={options1}
-              placeholder={{ label: 'Selecione a Marca:', value: null }}
-              onValueChange={(value) => {
-                setSelectedOption1(value);
-              }}
-              
-            />
-            </ViewPicker>
-          </ViewOptions>
-          
+        <ContentContainer>
           <ViewOptions>
-            <ButtonText>Selecione o Modelo</ButtonText>
-            <ViewPicker>  
+            <ButtonText>Selecione a marca do carro:</ButtonText>
+            <ViewPicker> 
               <RNPickerSelect
-                placeholder={{label: 'Selecione o Modelo:', value: null }}  
-                onValueChange={value => setSelectedOption2(value)}
-                items={options2}
-                disabled={!selectedOption1}
+                style={{
+                  inputAndroid: {                    
+                    color: 'white'                   
+                  }
+                }}
+                items={options1}
+                placeholder={{ label: 'Selecione a Marca:', value: null }}
+                onValueChange={(value) => {
+                  setSelectedOption1(value);
+                }}
+                
+              />
+              </ViewPicker>
+            </ViewOptions>
+            
+            <ViewOptions>
+              <ButtonText>Selecione o Modelo</ButtonText>
+              <ViewPicker>  
+                <RNPickerSelect
+                  placeholder={{label: 'Selecione o Modelo:', value: null }}  
+                  onValueChange={value => setSelectedOption2(value)}
+                  items={options2}
+                  disabled={!selectedOption1}
+                  style={{
+                    inputAndroid: {                    
+                      color: 'white'                   
+                    }
+                  }}
+                />
+              </ViewPicker>
+            </ViewOptions>
+            
+            <ViewOptions>
+              <ButtonText>Selecione o Ano e Combustivel</ButtonText>
+              <ViewPicker>
+              <RNPickerSelect
+                placeholder={{label: 'Selecione o Ano e Combustivel:'}}  
+                onValueChange={value => setSelectedOption3(value)}
+                items={options3}
+                disabled={!selectedOption2}
                 style={{
                   inputAndroid: {                    
                     color: 'white'                   
                   }
                 }}
               />
-            </ViewPicker>
-          </ViewOptions>
-          
-          <ViewOptions>
-            <ButtonText>Selecione o Ano e Combustivel</ButtonText>
-            <ViewPicker>
-            <RNPickerSelect
-              placeholder={{label: 'Selecione o Ano e Combustivel:'}}  
-              onValueChange={value => setSelectedOption3(value)}
-              items={options3}
-              disabled={!selectedOption2}
-              style={{
-                inputAndroid: {                    
-                  color: 'white'                   
-                }
-              }}
-            />
-            </ViewPicker>
-          </ViewOptions>
-
+              </ViewPicker>
+            </ViewOptions>
+          </ContentContainer>
 
         {carDetails ? (
+          <ContentContainer>
             <ViewCarSelected>
                 <OptionSelectedText>Marca: {carDetails.marcaCarro}</OptionSelectedText>
                 <OptionSelectedText>Modelo: {carDetails.modeloCarro}</OptionSelectedText>
@@ -194,12 +195,12 @@ export default function CreateCar() {
                   <Button onPress={() => saveCar(carDetails)}>
                     <ButtonText>Salvar</ButtonText>
                   </Button>
-                
-
             </ViewCarSelected>            
-            
+          </ContentContainer>            
             ) : (
-                 <OptionSelectedText>Preencha os dados acima</OptionSelectedText>
+              <ContentContainer>
+                <OptionSelectedText>Preencha os dados acima</OptionSelectedText>
+              </ContentContainer>
         )}
               
       </Container>

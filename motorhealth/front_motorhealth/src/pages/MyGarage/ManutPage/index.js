@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Title, ButtonText, ViewRefreshCar, DescriptionText, ViewManutCar } from "../ManutPage/style";
+import { Button, Container, Title, ButtonText, ViewRefreshCar, DescriptionText, ViewManutCar, ContentContainer } from "../ManutPage/style";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiCar from "../../../Services/ApiCar";
@@ -36,28 +36,37 @@ export default function ManutPage(){
     return(
         <Container>
             
-            <Title>Carro: {nameVeic} </Title>
-               
-                {listManut
-                .filter((item) => item.idCar == storage)
-                .map((item) => (
-                    <ViewManutCar key={item.id} >
-                        <DescriptionText>Descrição: {item.descriptionMaintenance}</DescriptionText>
-                        <DescriptionText>Quilometragem: {item.km} </DescriptionText>
-                        <DescriptionText>Data Prevista: {item.date} </DescriptionText>
-                        <DescriptionText>Obs: {item.obs} </DescriptionText>
-                    </ViewManutCar>
-                ))}
+            <ContentContainer>
+                <Title>Carro: {nameVeic} </Title>
                 
-             <Button onPress={() => navigation.navigate('CreateManut')} >
-                <ButtonText>Nova Manutenção</ButtonText>
-            </Button>
+                    {listManut
+                    .filter((item) => item.idCar == storage)
+                    .map((item) => (
+                        <ViewManutCar key={item.id} >
+                            <DescriptionText>Descrição: {item.descriptionMaintenance}</DescriptionText>
+                            <DescriptionText>Quilometragem: {item.km} </DescriptionText>
+                            <DescriptionText>Data Prevista: {item.date} </DescriptionText>
+                            <DescriptionText>Obs: {item.obs} </DescriptionText>
+                        </ViewManutCar>
+                    ))}
+             </ContentContainer>   
+             
+             <ContentContainer>
 
-            <ViewRefreshCar>
-              <Button>
-                <ButtonText onPress={() => getManutCars()}>Recarregar Manutenções</ButtonText>
-              </Button>
-            </ViewRefreshCar>
+                <ViewRefreshCar>
+                    <Button onPress={() => navigation.navigate('CreateManut')} >
+                        <ButtonText>Nova Manutenção</ButtonText>
+                    </Button>
+                </ViewRefreshCar>
+
+                <ViewRefreshCar>
+                    <Button>
+                        <ButtonText onPress={() => getManutCars()}>Recarregar Manutenções</ButtonText>
+                    </Button>
+                </ViewRefreshCar>
+
+            </ContentContainer>
+
         </Container>
     );
 }

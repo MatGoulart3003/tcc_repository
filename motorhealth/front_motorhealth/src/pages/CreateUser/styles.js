@@ -70,7 +70,7 @@ export const ViewCreateUser = styled.View`
     background-color: #4F4F4F;
     justify-content: center;
     align-items: center;
-    shadow-color: black;
+    shadow-color: white;
     shadow-offset: 0px 2px;
     shadow-opacity: 0.5;
     shadow-radius: 50px;
